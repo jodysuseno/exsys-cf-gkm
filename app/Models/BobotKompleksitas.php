@@ -10,7 +10,7 @@ class BobotKompleksitas extends Model
     use HasFactory;
 
     protected $fillable = [
-        'keterangan',
+        'nama',
         'bobot'
     ];
     

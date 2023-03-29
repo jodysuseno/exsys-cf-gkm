@@ -14,7 +14,10 @@ class BobotKompleksitasController extends Controller
      */
     public function index()
     {
-        //
+        return view('kompleksitas.index', [
+            'title' => 'Data Bobot Gejala',
+            'kompleksitas' => BobotKompleksitas::orderByDesc('id')->get(),
+        ]);
     }
 
     /**
@@ -24,7 +27,9 @@ class BobotKompleksitasController extends Controller
      */
     public function create()
     {
-        //
+        return view('kompleksitas.create', [
+            'title' => 'Data Kompleksitas'
+        ]);
     }
 
     /**
@@ -35,7 +40,17 @@ class BobotKompleksitasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'bobot' => 'required|numeric'
+        ]);
+
+        BobotKompleksitas::create([
+            'nama' => $request->nama,
+            'bobot' => $request->bobot,
+        ]);
+
+        return redirect()->route('kompleksitas.index')->with('status', 'Data gejala berhasil disimpan');
     }
 
     /**
@@ -55,9 +70,12 @@ class BobotKompleksitasController extends Controller
      * @param  \App\Models\BobotKompleksitas  $bobotKompleksitas
      * @return \Illuminate\Http\Response
      */
-    public function edit(BobotKompleksitas $bobotKompleksitas)
+    public function edit($id)
     {
-        //
+        return view('kompleksitas.edit',[
+            'title' => 'Data Kompleksitas',
+            'get_kompleksitas' => BobotKompleksitas::findOrFail($id)
+        ]);
     }
 
     /**
@@ -67,9 +85,19 @@ class BobotKompleksitasController extends Controller
      * @param  \App\Models\BobotKompleksitas  $bobotKompleksitas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BobotKompleksitas $bobotKompleksitas)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'bobot' => 'required|numeric'
+        ]);
+
+        BobotKompleksitas::where('id', $id)->update([
+            'nama' => $request->nama,
+            'bobot' => $request->bobot,
+        ]);
+
+        return redirect()->route('kompleksitas.index')->with('status', 'Data gejala berhasil diedit');
     }
 
     /**
@@ -78,8 +106,9 @@ class BobotKompleksitasController extends Controller
      * @param  \App\Models\BobotKompleksitas  $bobotKompleksitas
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BobotKompleksitas $bobotKompleksitas)
+    public function destroy($id)
     {
-        //
+        BobotKompleksitas::destroy($id);
+        return redirect()->route('kompleksitas.index')->with('status','Data gejala berhasil dihapus');
     }
 }

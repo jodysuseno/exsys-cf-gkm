@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class GejalaController extends Controller
 {
+
+    public function autoCode()
+    {
+        $lates_evidence = Gejala::orderby('id', 'desc')->first();
+        $code = $lates_evidence->kode;
+        $order = (int) substr($code, 1, 4);
+        $order++;
+        $letter = "G";
+        $code = $letter . sprintf("%04s", $order);
+        return $code;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +25,10 @@ class GejalaController extends Controller
      */
     public function index()
     {
-        //
+        return view('gejala.index', [
+            'title' => 'Data Gejala',
+            'gejala' => Gejala::orderByDesc('id')->get(),
+        ]);
     }
 
     /**
@@ -24,7 +38,10 @@ class GejalaController extends Controller
      */
     public function create()
     {
-        //
+        return view('gejala.create', [
+            'title' => 'Data Gejala',
+            'kode' => $this->autoCode()
+        ]);
     }
 
     /**
@@ -35,7 +52,16 @@ class GejalaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required'
+        ]);
+
+        Gejala::create([
+            'kode' => $request->kode,
+            'nama' => $request->nama
+        ]);
+
+        return redirect()->route('gejala.index')->with('status', 'Data gejala berhasil disimpan');
     }
 
     /**
@@ -55,9 +81,13 @@ class GejalaController extends Controller
      * @param  \App\Models\Gejala  $gejala
      * @return \Illuminate\Http\Response
      */
-    public function edit(Gejala $gejala)
+    public function edit($id)
     {
-        //
+        return view('gejala.edit',[
+            'title' => 'Data Gejala',
+            'kode' => $this->autoCode(),
+            'get_gejala' => Gejala::findOrFail($id)
+        ]);
     }
 
     /**
@@ -67,9 +97,17 @@ class GejalaController extends Controller
      * @param  \App\Models\Gejala  $gejala
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Gejala $gejala)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required'
+        ]);
+
+        Gejala::where('id', $id)->update([
+            'nama' => $request->nama
+        ]);
+
+        return redirect()->route('gejala.index')->with('status', 'Data gejala berhasil diedit');
     }
 
     /**
@@ -78,8 +116,9 @@ class GejalaController extends Controller
      * @param  \App\Models\Gejala  $gejala
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Gejala $gejala)
+    public function destroy($id)
     {
-        //
+        Gejala::destroy($id);
+        return redirect()->route('gejala.index')->with('status','Data gejala berhasil dihapus');
     }
 }

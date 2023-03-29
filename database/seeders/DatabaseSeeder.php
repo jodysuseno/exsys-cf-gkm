@@ -57,31 +57,31 @@ class DatabaseSeeder extends Seeder
         BobotGejala::create(['nama' => 'Gejala Sedang', 'bobot' => 3]);
         BobotGejala::create(['nama' => 'Gejaal Dominan', 'bobot' => 5]);
         //buat data penyakit
-        Penyakit::create(['kode' => 'P1', 'nama' => 'Gangguan Depresi', 'definisi' => 'definisi penyakit', 'solusi' => 'solusi penyakit']);
-        Penyakit::create(['kode' => 'P2', 'nama' => 'Gangguan Kecemasan', 'definisi' => 'definisi penyakit', 'solusi' => 'solusi penyakit']);
-        Penyakit::create(['kode' => 'P3', 'nama' => 'Gangguan Somatoform', 'definisi' => 'definisi penyakit', 'solusi' => 'solusi penyakit']);
-        Penyakit::create(['kode' => 'P4', 'nama' => 'Gangguan Neurotik', 'definisi' => 'definisi penyakit', 'solusi' => 'solusi penyakit']);
+        Penyakit::create(['kode' => 'P0001', 'nama' => 'Gangguan Depresi', 'definisi' => 'definisi penyakit', 'solusi' => 'solusi penyakit']);
+        Penyakit::create(['kode' => 'P0002', 'nama' => 'Gangguan Kecemasan', 'definisi' => 'definisi penyakit', 'solusi' => 'solusi penyakit']);
+        Penyakit::create(['kode' => 'P0003', 'nama' => 'Gangguan Somatoform', 'definisi' => 'definisi penyakit', 'solusi' => 'solusi penyakit']);
+        Penyakit::create(['kode' => 'P0004', 'nama' => 'Gangguan Neurotik', 'definisi' => 'definisi penyakit', 'solusi' => 'solusi penyakit']);
         //buat data gejala 
-        Gejala::create(['kode' => 'G1', 'nama' => 'Sering merasakan sakit kepala']);
-        Gejala::create(['kode' => 'G2', 'nama' => 'Sulit untuk tidur']);
-        Gejala::create(['kode' => 'G3', 'nama' => 'Mudah merasa takut']);
-        Gejala::create(['kode' => 'G4', 'nama' => 'Merasa tegang, cemas dan khawatir']);
-        Gejala::create(['kode' => 'G5', 'nama' => 'Tangan sering bergemetar']);
-        Gejala::create(['kode' => 'G6', 'nama' => 'Pencernaan terganggu atau merasa lebih buruk']);
-        Gejala::create(['kode' => 'G7', 'nama' => 'Sulit untuk berpikir jernih']);
-        Gejala::create(['kode' => 'G8', 'nama' => 'Merasa tidak Bahagia']);
-        Gejala::create(['kode' => 'G9', 'nama' => 'Menangis lebih sering']);
-        Gejala::create(['kode' => 'G10', 'nama' => 'Merasa sulit untuk menikmati sehari-hari']);
-        Gejala::create(['kode' => 'G11', 'nama' => 'Sulit untuk mengambil keputusan']);
-        Gejala::create(['kode' => 'G12', 'nama' => 'Pekerjaan sehari-hari merasa terganggu']);
-        Gejala::create(['kode' => 'G13', 'nama' => 'Tidak mampu melakukan hal yang bermanfaat dalam hidup']);
-        Gejala::create(['kode' => 'G14', 'nama' => 'Kehilangan minat pada berbagai hal']);
-        Gejala::create(['kode' => 'G15', 'nama' => 'Merasa tidak berharga']);
-        Gejala::create(['kode' => 'G16', 'nama' => 'Mempunyai pikiran untuk mengakhiri hidup']);
-        Gejala::create(['kode' => 'G17', 'nama' => 'Merasa lelah sepanjang waktu']);
-        Gejala::create(['kode' => 'G18', 'nama' => 'Mengalami rasa tidak enak perut']);
-        Gejala::create(['kode' => 'G19', 'nama' => 'Terlalu banyak makan atau kurang nafsu makan']);
-        Gejala::create(['kode' => 'G20', 'nama' => 'Bergerak atau berbicara sangat lambat sehingga orang lain memperhatikannya.']);
+        Gejala::create(['kode' => 'G0001', 'nama' => 'Sering merasakan sakit kepala']);
+        Gejala::create(['kode' => 'G0002', 'nama' => 'Sulit untuk tidur']);
+        Gejala::create(['kode' => 'G0003', 'nama' => 'Mudah merasa takut']);
+        Gejala::create(['kode' => 'G0004', 'nama' => 'Merasa tegang, cemas dan khawatir']);
+        Gejala::create(['kode' => 'G0005', 'nama' => 'Tangan sering bergemetar']);
+        Gejala::create(['kode' => 'G0006', 'nama' => 'Pencernaan terganggu atau merasa lebih buruk']);
+        Gejala::create(['kode' => 'G0007', 'nama' => 'Sulit untuk berpikir jernih']);
+        Gejala::create(['kode' => 'G0008', 'nama' => 'Merasa tidak Bahagia']);
+        Gejala::create(['kode' => 'G0009', 'nama' => 'Menangis lebih sering']);
+        Gejala::create(['kode' => 'G0010', 'nama' => 'Merasa sulit untuk menikmati sehari-hari']);
+        Gejala::create(['kode' => 'G0011', 'nama' => 'Sulit untuk mengambil keputusan']);
+        Gejala::create(['kode' => 'G0012', 'nama' => 'Pekerjaan sehari-hari merasa terganggu']);
+        Gejala::create(['kode' => 'G0013', 'nama' => 'Tidak mampu melakukan hal yang bermanfaat dalam hidup']);
+        Gejala::create(['kode' => 'G0014', 'nama' => 'Kehilangan minat pada berbagai hal']);
+        Gejala::create(['kode' => 'G0015', 'nama' => 'Merasa tidak berharga']);
+        Gejala::create(['kode' => 'G0016', 'nama' => 'Mempunyai pikiran untuk mengakhiri hidup']);
+        Gejala::create(['kode' => 'G0017', 'nama' => 'Merasa lelah sepanjang waktu']);
+        Gejala::create(['kode' => 'G0018', 'nama' => 'Mengalami rasa tidak enak perut']);
+        Gejala::create(['kode' => 'G0019', 'nama' => 'Terlalu banyak makan atau kurang nafsu makan']);
+        Gejala::create(['kode' => 'G0020', 'nama' => 'Bergerak atau berbicara sangat lambat sehingga orang lain memperhatikannya.']);
         //buat data pasien
         Pasien::create([
             'nomor_kartu_identitas' => '3514100102030001',

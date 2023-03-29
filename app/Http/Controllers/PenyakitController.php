@@ -7,6 +7,16 @@ use Illuminate\Http\Request;
 
 class PenyakitController extends Controller
 {
+    public function autoCode()
+    {
+        $lates_evidence = Penyakit::orderby('id', 'desc')->first();
+        $code = $lates_evidence->kode;
+        $order = (int) substr($code, 1, 4);
+        $order++;
+        $letter = "P";
+        $code = $letter . sprintf("%04s", $order);
+        return $code;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,10 @@ class PenyakitController extends Controller
      */
     public function index()
     {
-        //
+        return view('penyakit.index', [
+            'title' => 'Data Penyakit',
+            'penyakit' => Penyakit::orderByDesc('id')->get(),
+        ]);
     }
 
     /**
@@ -24,7 +37,10 @@ class PenyakitController extends Controller
      */
     public function create()
     {
-        //
+        return view('penyakit.create', [
+            'title' => 'Data Penyakit',
+            'kode' => $this->autoCode()
+        ]);
     }
 
     /**
@@ -35,7 +51,20 @@ class PenyakitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'definisi' => 'required',
+            'solusi' => 'required'
+        ]);
+
+        Penyakit::create([
+            'kode' => $request->kode,
+            'nama' => $request->nama,
+            'definisi' => $request->definisi,
+            'solusi' => $request->solusi
+        ]);
+
+        return redirect()->route('penyakit.index')->with('status', 'Data penyakit berhasil disimpan');
     }
 
     /**
@@ -55,9 +84,13 @@ class PenyakitController extends Controller
      * @param  \App\Models\Penyakit  $penyakit
      * @return \Illuminate\Http\Response
      */
-    public function edit(Penyakit $penyakit)
+    public function edit($id)
     {
-        //
+        return view('penyakit.edit',[
+            'title' => 'Data Penyakit',
+            'kode' => $this->autoCode(),
+            'get_penyakit' => Penyakit::findOrFail($id)
+        ]);
     }
 
     /**
@@ -67,9 +100,21 @@ class PenyakitController extends Controller
      * @param  \App\Models\Penyakit  $penyakit
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Penyakit $penyakit)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'definisi' => 'required',
+            'solusi' => 'required'
+        ]);
+
+        Penyakit::where('id', $id)->update([
+            'nama' => $request->nama,
+            'definisi' => $request->definisi,
+            'solusi' => $request->solusi
+        ]);
+
+        return redirect()->route('penyakit.index')->with('status', 'Data penyakit berhasil diedit');
     }
 
     /**
@@ -78,8 +123,9 @@ class PenyakitController extends Controller
      * @param  \App\Models\Penyakit  $penyakit
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Penyakit $penyakit)
+    public function destroy($id)
     {
-        //
+        Penyakit::destroy($id);
+        return redirect()->route('penyakit.index')->with('status','Data penyakit berhasil dihapus');
     }
 }

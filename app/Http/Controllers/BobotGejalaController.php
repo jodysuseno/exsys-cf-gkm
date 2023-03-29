@@ -14,7 +14,10 @@ class BobotGejalaController extends Controller
      */
     public function index()
     {
-        //
+        return view('bobot_gejala.index', [
+            'title' => 'Data Bobot Gejala',
+            'bobot_gejala' => BobotGejala::orderByDesc('id')->get(),
+        ]);
     }
 
     /**
@@ -24,7 +27,9 @@ class BobotGejalaController extends Controller
      */
     public function create()
     {
-        //
+        return view('bobot_gejala.create', [
+            'title' => 'Data Bobot Gejala'
+        ]);
     }
 
     /**
@@ -35,7 +40,17 @@ class BobotGejalaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'bobot' => 'required|numeric'
+        ]);
+
+        BobotGejala::create([
+            'nama' => $request->nama,
+            'bobot' => $request->bobot,
+        ]);
+
+        return redirect()->route('bobot_gejala.index')->with('status', 'Data gejala berhasil disimpan');
     }
 
     /**
@@ -55,9 +70,12 @@ class BobotGejalaController extends Controller
      * @param  \App\Models\BobotGejala  $bobotGejala
      * @return \Illuminate\Http\Response
      */
-    public function edit(BobotGejala $bobotGejala)
+    public function edit($id)
     {
-        //
+        return view('bobot_gejala.edit',[
+            'title' => 'Data Bobot Gejala',
+            'get_bobot_gejala' => BobotGejala::findOrFail($id)
+        ]);
     }
 
     /**
@@ -67,9 +85,19 @@ class BobotGejalaController extends Controller
      * @param  \App\Models\BobotGejala  $bobotGejala
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BobotGejala $bobotGejala)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'bobot' => 'required|numeric'
+        ]);
+
+        BobotGejala::where('id', $id)->update([
+            'nama' => $request->nama,
+            'bobot' => $request->bobot,
+        ]);
+
+        return redirect()->route('bobot_gejala.index')->with('status', 'Data gejala berhasil diedit');
     }
 
     /**
@@ -78,8 +106,9 @@ class BobotGejalaController extends Controller
      * @param  \App\Models\BobotGejala  $bobotGejala
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BobotGejala $bobotGejala)
+    public function destroy($id)
     {
-        //
+        BobotGejala::destroy($id);
+        return redirect()->route('bobot_gejala.index')->with('status','Data gejala berhasil dihapus');
     }
 }

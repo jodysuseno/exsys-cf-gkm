@@ -117,6 +117,6 @@ class PasienController extends Controller
     public function destroy($id)
     {
         Pasien::destroy($id);
-        return redirect()->route('pasien.index')->with('status','Data berhasil dihapus');
+        return redirect()->route('gejala.index')->with('status','Data berhasil dihapus');
     }
 }
