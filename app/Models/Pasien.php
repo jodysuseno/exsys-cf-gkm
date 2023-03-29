@@ -10,11 +10,10 @@ class Pasien extends Model
     use HasFactory;
     
     protected $fillable = [
-        'bobot_kompleksitas_id',
         'user_id',
+        'nomor_kartu_identitas',
         'nama',
         'umur',
         'phone',
-        'status'
     ];
 }

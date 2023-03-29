@@ -18,7 +18,7 @@
       </ul>
     </li>
     @endif
-    <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-wheelchair"></i><span class="app-menu__label">Data Pasien</span></a></li>
+    <li><a class="app-menu__item" href="{{ route('pasien.index') }}"><i class="app-menu__icon fa fa-wheelchair"></i><span class="app-menu__label">Data Pasien</span></a></li>
     <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-stethoscope"></i><span class="app-menu__label">Data Gejala</span></a></li>
     <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-heartbeat"></i><span class="app-menu__label">Data Penyakit</span></a></li>
     <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-lightbulb-o"></i><span class="app-menu__label">Basis Pengetahuan</span></a></li>

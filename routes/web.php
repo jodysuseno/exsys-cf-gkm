@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GejalaController;
+use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PenyakitController;
 
 /*
@@ -23,6 +24,7 @@ use App\Http\Controllers\PenyakitController;
 Route::group(['middleware' => ['role:admin,pakar,perawat', 'auth']], function () {
   Route::get('/', [AppController::class, 'dashboard'])->name('dashboard');
   Route::get('/dashboard', [AppController::class, 'dashboard'])->name('dashboard');
+  Route::resource('/pasien', PasienController::class);
   // Data admin
   // Route::resource('/gejala', GejalaController::class);
   // Route::resource('/penyakit', PenyakitController::class);
