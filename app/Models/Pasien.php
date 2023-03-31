@@ -16,4 +16,19 @@ class Pasien extends Model
         'umur',
         'phone',
     ];
+
+    public function basis_pengetahuan()
+    {
+        return $this->hasMany(BasisPengetahuan::class);
+    }
+    public function kasus()
+    {
+        return $this->hasMany(Kasus::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    
 }

@@ -14,4 +14,13 @@ class Gejala extends Model
         'kode',
         'nama',
     ];
+
+    public function basis_pengetahuan()
+    {
+        return $this->hasMany(BasisPengetahuan::class);
+    }
+    public function bobot_gejala()
+    {
+        return $this->belongsTo(BobotGejala::class);
+    }
 }

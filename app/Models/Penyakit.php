@@ -15,4 +15,13 @@ class Penyakit extends Model
         'definisi',
         'solusi',
     ];
+
+    public function basis_pengetahuan()
+    {
+        return $this->hasMany(BasisPengetahuan::class);
+    }
+    public function kasus()
+    {
+        return $this->hasMany(Kasus::class);
+    }
 }

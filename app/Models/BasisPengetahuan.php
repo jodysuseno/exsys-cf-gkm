@@ -10,8 +10,21 @@ class BasisPengetahuan extends Model
     use HasFactory;
     
     protected $fillable = [
-        'pasien_id',
-        'penyakit_id',
+        'kasus_id',
         'gejala_id',
+        'bobot_gejala_id',
     ];
+
+    public function kasus()
+    {
+        return $this->belongsTo(Pasien::class);
+    }
+    public function gejala()
+    {
+        return $this->belongsTo(Gejala::class);
+    }
+    public function bobot_gejala()
+    {
+        return $this->belongsTo(BobotGejala::class);
+    }
 }

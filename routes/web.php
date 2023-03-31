@@ -8,6 +8,9 @@ use App\Http\Controllers\BobotGejalaController;
 use App\Http\Controllers\BobotkompleksitasController;
 use App\Http\Controllers\PasienController;
 use App\Http\Controllers\PenyakitController;
+use App\Http\Controllers\KasusController;
+use App\Http\Controllers\BasisPengetahuanController;
+use App\Http\Controllers\BasisPengetahuanKompleksitasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +34,9 @@ Route::group(['middleware' => ['role:admin,pakar,perawat', 'auth']], function ()
   Route::resource('/bobot_gejala', BobotGejalaController::class);
   Route::resource('/kompleksitas', BobotkompleksitasController::class);
   Route::resource('/penyakit', PenyakitController::class);
+  Route::resource('/kasus', KasusController::class);
+  Route::resource('/basis_pengetahuan', BasisPengetahuanController::class);
+  Route::resource('/basis_pengetahuan_kompleksitas', BasisPengetahuanKompleksitasController::class);
   // Data admin
   // Route::resource('/gejala', GejalaController::class);
   // Route::resource('/penyakit', PenyakitController::class);

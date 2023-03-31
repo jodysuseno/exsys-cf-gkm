@@ -11,8 +11,8 @@
     <div class="col-md-12">
       <div class="tile">
         <div class="tile-body">
-          
-          <a href="{{ route('gejala.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Tambah {{ $title }}</a>
+          <!-- Modal trigger button -->
+          {{-- <a href="{{ route('kasus.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Tambah {{ $title }}</a> --}}
           
           @if (session('status'))   
           <div class="alert alert-dismissible alert-success">
@@ -26,26 +26,28 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Kode</th>
-                  <th>Nama</th>
+                  <th>Pasien</th>
+                  <th>Penyakit</th>
+                  <th>Status</th>
                   <th>Option</th>
                 </tr>
               </thead>
               <tbody>
-                @forelse ($gejala as $item)
+                @forelse ($kasus as $item)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  <td>{{ $item->kode}}</td>
-                  <td>{{ $item->nama }}</td>
+                  <td>{{ $item->pasien->nama}}</td>
+                  <td>{{ $item->penyakit->nama }}</td>
+                  <td>{{ $item->status }}</td>
                   <td>
                     {{-- tombol edit --}}
-                    <a href="{{ route('gejala.edit', $item->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i> Edit</a>
+                    <a href="{{ route('kasus.show', $item->id) }}" class="btn btn-sm btn-secondary"><i class="fa fa-eye"></i> Detail</a>
                     {{-- tombol hapus --}}
-                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapusId{{ $item->id }}"><i class="fa fa-trash"></i> Hapus</button>
+                    {{-- <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapusId{{ $item->id }}"><i class="fa fa-trash"></i> Hapus</button>
                     <!-- Modal Body -->
                     <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
                     <div class="modal fade" id="modalHapusId{{ $item->id }}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-                      <div class="modal-dialog modal-sm modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+                      <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title" id="modalTitleId">Hapus {{ $title }}</h5>
@@ -56,7 +58,7 @@
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <form class="d-inline" action="{{ route('gejala.destroy', $item->id) }}" method="post">
+                            <form class="d-inline" action="{{ route('kasus.destroy', $item->id) }}" method="post">
                               @csrf
                               @method('delete')
                               <button class="btn btn-danger"><i class="fa fa-trash"></i> Hapus</button>
@@ -64,7 +66,7 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> --}}
                   </td>
                 </tr>
                 @empty

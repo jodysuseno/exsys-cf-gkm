@@ -13,5 +13,11 @@ class BobotKompleksitas extends Model
         'nama',
         'bobot'
     ];
+
+    public function basis_pengetahuan_kompleksitas()
+    {
+        return $this->hasMany(BasisPengetahuanKompleksitas::class);
+    }
+
     
 }

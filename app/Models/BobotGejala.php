@@ -13,4 +13,14 @@ class BobotGejala extends Model
         'nama',
         'bobot'
     ];
+
+    public function gejala()
+    {
+        return $this->hasMany(Gejala::class);
+    }
+
+    public function basis_pengetahuan()
+    {
+        return $this->hasMany(BasisPengetahuan::class);
+    }
 }
