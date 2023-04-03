@@ -13,6 +13,7 @@ class Kasus extends Model
         'pasien_id',
         'user_id',
         'penyakit_id',
+        'similarity',
         'status',
     ];
 

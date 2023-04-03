@@ -71,7 +71,7 @@ class BasisPengetahuanController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -83,7 +83,11 @@ class BasisPengetahuanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        BasisPengetahuan::where('id', $id)->update([
+            'bobot_gejala_id' => $request->bobot_gejala_id
+        ]);
+
+        return redirect()->back();
     }
 
     /**

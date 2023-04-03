@@ -30,16 +30,6 @@ Route::group(['middleware' => ['role:admin,pakar,perawat', 'auth']], function ()
   Route::get('/', [AppController::class, 'dashboard'])->name('dashboard');
   Route::get('/dashboard', [AppController::class, 'dashboard'])->name('dashboard');
   Route::resource('/pasien', PasienController::class);
-  Route::resource('/gejala', GejalaController::class);
-  Route::resource('/bobot_gejala', BobotGejalaController::class);
-  Route::resource('/kompleksitas', BobotkompleksitasController::class);
-  Route::resource('/penyakit', PenyakitController::class);
-  Route::resource('/kasus', KasusController::class);
-  Route::resource('/basis_pengetahuan', BasisPengetahuanController::class);
-  Route::resource('/basis_pengetahuan_kompleksitas', BasisPengetahuanKompleksitasController::class);
-  // Data admin
-  // Route::resource('/gejala', GejalaController::class);
-  // Route::resource('/penyakit', PenyakitController::class);
 });
 
 Route::group(['middleware' => ['role:admin', 'auth']], function () {
@@ -47,7 +37,19 @@ Route::group(['middleware' => ['role:admin', 'auth']], function () {
   Route::get('/data_pakar', [UserController::class, 'pakar_index'])->name('pakar_index');
   Route::get('/data_perawat', [UserController::class, 'perawat_index'])->name('perawat_index');
   Route::resource('/user', UserController::class);
-
+});
+Route::group(['middleware' => ['role:perawat', 'auth']], function () {
+  Route::get('/sistem_pakar', [AppController::class, 'sistem_pakar'])->name('sistem_pakar');
+  Route::post('/hasil_pakar', [AppController::class, 'hasil_pakar'])->name('hasil_pakar');
+});
+Route::group(['middleware' => ['role:pakar', 'auth']], function () {
+  Route::resource('/gejala', GejalaController::class);
+  Route::resource('/bobot_gejala', BobotGejalaController::class);
+  Route::resource('/kompleksitas', BobotkompleksitasController::class);
+  Route::resource('/penyakit', PenyakitController::class);
+  Route::resource('/kasus', KasusController::class);
+  Route::resource('/basis_pengetahuan', BasisPengetahuanController::class);
+  Route::resource('/basis_pengetahuan_kompleksitas', BasisPengetahuanKompleksitasController::class);
 });
 
 Route::middleware(['guest'])->group(function () {

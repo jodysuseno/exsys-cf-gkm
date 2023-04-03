@@ -112,24 +112,28 @@ class DatabaseSeeder extends Seeder
             'pasien_id' => 1,
             'user_id' => 3,
             'penyakit_id' => 1,
+            'similarity' => 1.00,
             'status' => 'reuse',
         ]);
         Kasus::create([
             'pasien_id' => 2,
             'user_id' => 3,
             'penyakit_id' => 2,
+            'similarity' => 1.00,
             'status' => 'reuse',
         ]);
         Kasus::create([
             'pasien_id' => 3,
             'user_id' => 3,
             'penyakit_id' => 3,
+            'similarity' => 1.00,
             'status' => 'reuse',
         ]);
         Kasus::create([
             'pasien_id' => 4,
             'user_id' => 3,
             'penyakit_id' => 4,
+            'similarity' => 1.00,
             'status' => 'reuse',
         ]);
         //buat basis pengetahuan

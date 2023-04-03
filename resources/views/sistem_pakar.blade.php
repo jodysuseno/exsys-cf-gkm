@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-md-12">
       <div class="tile">
-        <form action="{{ route('kasus.store') }}" method="POST">
+        <form action="{{ route('hasil_pakar') }}" method="POST">
           @csrf
           <h3 class="tile-title">Sistem Pakar</h3>
           <div class="tile-body col-sm-12 col-md-6 col-gl-6">
@@ -93,16 +93,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="tile-body col-sm-12 col-md-6 col-gl-6">
-            <div class="form-group">
-              <label for="gejala_id">Penyakit</label>
-              <select class="form-control @error('penyakit_id') is-invalid @enderror" id="penyakit_id" name="penyakit_id">
-                @foreach ($get_penyakit as $item)
-                  <option value="{{ $item->id }}">{{ $item->nama}}</option>
-                @endforeach
-              </select>
             </div>
           </div>
           <hr>

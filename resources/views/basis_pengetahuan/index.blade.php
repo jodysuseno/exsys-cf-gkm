@@ -12,7 +12,7 @@
       <div class="tile">
         <div class="tile-body">
           <!-- Modal trigger button -->
-          {{-- <a href="{{ route('kasus.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Tambah {{ $title }}</a> --}}
+          <a href="{{ route('kasus.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Tambah {{ $title }}</a>
           
           @if (session('status'))   
           <div class="alert alert-dismissible alert-success">
@@ -28,7 +28,9 @@
                   <th>No</th>
                   <th>Pasien</th>
                   <th>Penyakit</th>
+                  <th>Similarity</th>
                   <th>Status</th>
+                  <th>User Service</th>
                   <th>Option</th>
                 </tr>
               </thead>
@@ -38,7 +40,9 @@
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $item->pasien->nama}}</td>
                   <td>{{ $item->penyakit->nama }}</td>
+                  <td>{{ $item->similarity }}</td>
                   <td>{{ $item->status }}</td>
+                  <td>{{ $item->user->nama}}</td>
                   <td>
                     {{-- tombol edit --}}
                     <a href="{{ route('kasus.show', $item->id) }}" class="btn btn-sm btn-secondary"><i class="fa fa-eye"></i> Detail</a>

@@ -10,6 +10,7 @@ use App\Models\BobotKompleksitas;
 use Illuminate\Http\Request;
 use App\Models\Kasus;
 use App\Models\Pasien;
+use App\Models\Penyakit;
 use Illuminate\Support\Facades\DB;
 
 class KasusController extends Controller
@@ -23,7 +24,8 @@ class KasusController extends Controller
     {
         return view('basis_pengetahuan.index', [
             'title' => 'Basis Pengetahuan',
-            'kasus' => Kasus::where('status', 'reuse')->orderBy('id', 'desc')->get()
+            'kasus' => Kasus::orderBy('id', 'desc')->get(),
+            // 'kasus' => Kasus::where('status', 'reuse')->orderBy('id', 'desc')->get()
         ]);
     }
 
@@ -34,7 +36,13 @@ class KasusController extends Controller
      */
     public function create()
     {
-        //
+        return view('basis_pengetahuan.create', [
+            'pasien' => Pasien::orderByDesc('created_at')->get(),
+            'gejala' => Gejala::all(),
+            'kompleksitas' => BobotKompleksitas::all(),
+            'get_penyakit' => Penyakit::all(),
+            'title' => 'Buat Aturan Pakar'
+        ]);
     }
 
     /**
@@ -45,7 +53,38 @@ class KasusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'pasien_id' => 'required'
+        ]);
+
+        Kasus::create([
+            'pasien_id' => $request->pasien_id,
+            'user_id' => auth()->user()->id,
+            'penyakit_id' => $request->penyakit_id,
+            'similarity' => 1.00,
+            'status' => 'reuse',
+        ]);
+
+        // get id form new kasus
+        $get_new_kasus_id = Kasus::orderByDesc('id')->first()->id;
+
+        // add new gejala 
+        foreach ($request->gejala_id as $val_id_gejala) {
+            BasisPengetahuan::create([
+                'kasus_id' => $get_new_kasus_id,
+                'gejala_id' => $val_id_gejala,
+                'bobot_gejala_id' => BobotGejala::orderBy('bobot','asc')->first()->id,
+            ]);
+        }
+        // add kompleksitas
+        foreach ($request->kompleksitas_id as $req_komplek_val_item) {
+            BasisPengetahuanKompleksitas::create([
+                'kasus_id' => $get_new_kasus_id,
+                'kompleksitas_id' => $req_komplek_val_item,
+            ]);
+        }
+
+        return redirect()->route('kasus.index')->with('status', 'Berhasil ditambahkan!');
     }
 
     /**

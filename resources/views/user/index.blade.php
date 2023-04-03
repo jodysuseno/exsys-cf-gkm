@@ -160,7 +160,7 @@
                             <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                           </div>
                           <div class="modal-body">
-                            Apakah ada yakin untuk menghapus data "{{ $item->nama }}".
+                            Apakah ada yakin untuk menghapus data "{{ $item->nama }}". Jika ya maka data "{{ $item->nama }}" yang ada di basis pengetahuan akan juga dihapus. Jika tidak ingin menghapus mungkin bisa mengedit atau ubah data "{{ $item->nama }}".
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

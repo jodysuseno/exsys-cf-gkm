@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BasisPengetahuan;
 use App\Models\Gejala;
 use Illuminate\Http\Request;
 
@@ -118,6 +119,7 @@ class GejalaController extends Controller
      */
     public function destroy($id)
     {
+        BasisPengetahuan::where('gejala_id',$id)->delete();
         Gejala::destroy($id);
         return redirect()->route('gejala.index')->with('status','Data gejala berhasil dihapus');
     }

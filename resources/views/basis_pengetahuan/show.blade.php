@@ -94,7 +94,47 @@
                   <td>{{ $item->bobot_gejala->bobot }}</td>
                   <td>
                     {{-- tombol edit --}}
-                    {{-- <a href="{{ route('basis_pengetahuan.edit', $item->id) }}" class="btn btn-sm btn-secondary"><i class="fa fa-eye"></i> Detail</a> --}}
+                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modalEditId{{ $item->id }}"><i class="fa fa-edit"></i> Edit Bobot</button>
+                    <!-- Modal Body -->
+                    <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+                    <div class="modal fade" id="modalEditId{{ $item->id }}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+                      <div class="modal-dialog modal-sm modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="modalTitleId">Edit Bobot</h5>
+                            <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="{{ route('basis_pengetahuan.update', $item->id) }}" method="POST">
+                              @csrf
+                              @method('put')
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="modalTitleId">Tambah Gejala</h5>
+                                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="tile-body">
+                                  <div class="form-group">
+                                    <fieldset>
+                                      <label for="bobot_gejala_id">Bobot Gejala</label>
+                                      <select class="form-control @error('bobot_gejala_id') is-invalid @enderror" id="bobot_gejala_id" name="bobot_gejala_id" >
+                                        @foreach ($bobot_gejala as $itemb)
+                                          <option value="{{ $itemb->id }}" @if ($itemb->id == $item->bobot_gejala->id) selected @endif>{{ $itemb->nama }} = {{ $itemb->bobot }}</option>
+                                        @endforeach
+                                      </select>
+                                      @error('bobot_gejala_id') <div class="form-control-feedback text-danger">{{ $message }}</div> @enderror
+                                    </fieldset>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     {{-- tombol hapus --}}
                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapusId{{ $item->id }}"><i class="fa fa-trash"></i> Hapus</button>
                     <!-- Modal Body -->

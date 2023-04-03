@@ -9,7 +9,7 @@
   </div>
   <div class="row">
     <div class="col-md-6 col-lg-3">
-      <a href="" style="text-decoration: none;">
+      <a href="#" style="text-decoration: none;">
         <div class="widget-small primary coloured-icon "><i class="icon fa fa-users fa-3x"></i>
           <div class="info">
             <h4>Users</h4>
@@ -19,7 +19,7 @@
       </a>
     </div>
     <div class="col-md-6 col-lg-3">
-      <a href="" style="text-decoration: none;">
+      <a href="#" style="text-decoration: none;">
         <div class="widget-small info coloured-icon"><i class="icon fa fa-list fa-3x"></i>
           <div class="info">
             <h4>Kasus</h4>
@@ -29,7 +29,7 @@
       </a>
     </div>
     <div class="col-md-6 col-lg-3">
-      <a href="" style="text-decoration: none;">
+      <a href="#" style="text-decoration: none;">
         <div class="widget-small warning coloured-icon"><i class="icon fa fa-stethoscope fa-3x"></i>
           <div class="info">
             <h4>Gejala</h4>
@@ -39,7 +39,7 @@
       </a>
     </div>
     <div class="col-md-6 col-lg-3">
-      <a href="" style="text-decoration: none;">
+      <a href="#" style="text-decoration: none;">
         <div class="widget-small danger coloured-icon"><i class="icon fa fa-heartbeat fa-3x"></i>
           <div class="info">
             <h4>Penyakit</h4>

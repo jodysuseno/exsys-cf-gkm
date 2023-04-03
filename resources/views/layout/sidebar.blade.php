@@ -17,8 +17,10 @@
         <li><a class="treeview-item" href="{{ route('perawat_index') }}"><i class="icon fa fa-user-md"></i> Data Perawat</a></li>
       </ul>
     </li>
-    @endif
     <li><a class="app-menu__item" href="{{ route('pasien.index') }}"><i class="app-menu__icon fa fa-wheelchair"></i><span class="app-menu__label">Data Pasien</span></a></li>
+    @elseif(auth()->user()->role == 'pakar')
+    <li><a class="app-menu__item" href="{{ route('pasien.index') }}"><i class="app-menu__icon fa fa-wheelchair"></i><span class="app-menu__label">Data Pasien</span></a></li>
+    <li><a class="app-menu__item" href="{{ route('penyakit.index') }}"><i class="app-menu__icon fa fa-heartbeat"></i><span class="app-menu__label">Data Penyakit</span></a></li>
     <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-stethoscope"></i><span class="app-menu__label">Gejala dan Kompleksitas</span><i class="treeview-indicator fa fa-angle-right"></i></a>
       <ul class="treeview-menu">
         <li><a class="treeview-item" href="{{ route('gejala.index') }}"><i class="icon fa fa-stethoscope"></i> Data Gejala</a></li>
@@ -27,8 +29,10 @@
         <li><a class="treeview-item" href="{{ route('kompleksitas.index') }}"><i class="icon fa fa-stethoscope"></i> Data Kompleksitas</a></li>
       </ul>
     </li>
-    <li><a class="app-menu__item" href="{{ route('penyakit.index') }}"><i class="app-menu__icon fa fa-heartbeat"></i><span class="app-menu__label">Data Penyakit</span></a></li>
     <li><a class="app-menu__item" href="{{ route('kasus.index') }}"><i class="app-menu__icon fa fa-lightbulb-o"></i><span class="app-menu__label">Basis Pengetahuan</span></a></li>
-    <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Konsultasi Evaluasi</span></a></li>
+    @elseif(auth()->user()->role == 'perawat')
+    <li><a class="app-menu__item" href="{{ route('pasien.index') }}"><i class="app-menu__icon fa fa-wheelchair"></i><span class="app-menu__label">Data Pasien</span></a></li>
+    <li><a class="app-menu__item" href="{{ route('sistem_pakar') }}"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Konsultasi Evaluasi</span></a></li>
+    @endif
   </ul>
 </aside>

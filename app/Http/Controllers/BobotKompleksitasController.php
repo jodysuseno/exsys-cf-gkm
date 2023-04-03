@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BasisPengetahuanKompleksitas;
 use App\Models\BobotKompleksitas;
 use Illuminate\Http\Request;
 
@@ -108,6 +109,7 @@ class BobotKompleksitasController extends Controller
      */
     public function destroy($id)
     {
+        BasisPengetahuanKompleksitas::where('kompleksitas_id')->delete();
         BobotKompleksitas::destroy($id);
         return redirect()->route('kompleksitas.index')->with('status','Data gejala berhasil dihapus');
     }

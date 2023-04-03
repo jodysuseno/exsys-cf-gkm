@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BasisPengetahuan;
 use App\Models\BobotGejala;
 use Illuminate\Http\Request;
 
@@ -108,6 +109,7 @@ class BobotGejalaController extends Controller
      */
     public function destroy($id)
     {
+        BasisPengetahuan::where('bobot_gejala_id',$id)->delete();
         BobotGejala::destroy($id);
         return redirect()->route('bobot_gejala.index')->with('status','Data gejala berhasil dihapus');
     }

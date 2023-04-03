@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('pasien_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('penyakit_id');
+            $table->float('similarity');
             $table->foreign('pasien_id')->references('id')->on('pasiens')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('penyakit_id')->references('id')->on('penyakits')->onDelete('cascade')->onUpdate('cascade');
