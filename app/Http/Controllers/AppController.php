@@ -61,13 +61,14 @@ class AppController extends Controller
     {
 
         $request->validate([
-            'pasien_id' => 'required'
+            'pasien_id' => 'required',
+            // 'gejala_id' => 'required|array|min:1'
         ]);
 
         // get data kasus
-        $kasus = Kasus::where('status', 'reuse')->orderByDesc('id')->get();
+        $kasus = Kasus::where('status', 'reuse')->get();
         //set array variabel
-        $kasus_id = array();
+        // $kasus_id = array();
         $data_penyakit_id = array();
         $data_penyakit_name = array();
         $data_penyakit_devinisi = array();
@@ -103,46 +104,60 @@ class AppController extends Controller
             foreach ($data_gejala_id as $data_gejala_val_item) {
                 $data_gejala_val[] = BasisPengetahuan::where('kasus_id', $item->id)->where('gejala_id', $data_gejala_val_item)->first()->bobot_gejala->bobot;
             }
-            // req komplek
-            $req_komplek_id = array();
-            foreach ($request->kompleksitas_id as $req_komplek_item) {
-                $req_komplek_id[] = $req_komplek_item;
-            }
-            // data komplek
-            $data_komplek_id = array();
-            foreach (BasisPengetahuanKompleksitas::where('kasus_id', $item->id)->get() as $data_komplek_item) {
-                $data_komplek_id[] = $data_komplek_item->kompleksitas_id;
-            }
-
-            // get same id form request and kasus
-            $same_komplek = array_intersect($req_komplek_id, $data_komplek_id);
-
-            //get req bobot kompleksitas value
-            $req_komplek_val = array();
-            foreach ($same_komplek as $req_komplek_val_item) {
-                $req_komplek_val[] = BasisPengetahuanKompleksitas::where('kasus_id', $item->id)->where('kompleksitas_id', $req_komplek_val_item)->first()->kompleksitas->bobot;
-            }
-            //get data bobot kompleksitas value
-            $data_komplek_val = array();
-            foreach ($data_komplek_id as $data_komplek_val_item) {
-                $data_komplek_val[] = BasisPengetahuanKompleksitas::where('kasus_id', $item->id)->where('kompleksitas_id', $data_komplek_val_item)->first()->kompleksitas->bobot;
-            }
             // count similarity
             // merge data from gejala and kompleksitas
-            $mergeSW = array_merge($req_gejala_val, $req_komplek_val);
+            
+            if (is_null($request->kompleksitas_id)) {
+                $mergeSW = $req_gejala_val;
+                $mergeW = $data_gejala_val;
+                $same_komplek = null;
+                $data_komplek_id = null;
+            } else {
+                // req komplek
+                $req_komplek_id = array();
+                foreach ($request->kompleksitas_id as $req_komplek_item) {
+                    $req_komplek_id[] = $req_komplek_item;
+                }
+                // data komplek
+                $data_komplek_id = array();
+                foreach (BasisPengetahuanKompleksitas::where('kasus_id', $item->id)->get() as $data_komplek_item) {
+                    $data_komplek_id[] = $data_komplek_item->kompleksitas_id;
+                }
+
+                // get same id form request and kasus
+                $same_komplek = array_intersect($req_komplek_id, $data_komplek_id);
+
+                //get req bobot kompleksitas value
+                $req_komplek_val = array();
+                foreach ($same_komplek as $req_komplek_val_item) {
+                    $req_komplek_val[] = BasisPengetahuanKompleksitas::where('kasus_id', $item->id)->where('kompleksitas_id', $req_komplek_val_item)->first()->kompleksitas->bobot;
+                }
+                //get data bobot kompleksitas value
+                $data_komplek_val = array();
+                foreach ($data_komplek_id as $data_komplek_val_item) {
+                    $data_komplek_val[] = BasisPengetahuanKompleksitas::where('kasus_id', $item->id)->where('kompleksitas_id', $data_komplek_val_item)->first()->kompleksitas->bobot;
+                }
+                $mergeSW = array_merge($req_gejala_val, $req_komplek_val);
+                $mergeW = array_merge($data_gejala_val, $data_komplek_val);
+            }
+
+            // $mergeSW = array_merge($req_gejala_val, $req_komplek_val);
+            
             $totSW = 0;
             // count SW
             foreach ($mergeSW as $mergeSWs) {
                 $totSW = $totSW + $mergeSWs;
             }
-            $mergeW = array_merge($data_gejala_val, $data_komplek_val);
+            // $mergeW = array_merge($data_gejala_val, $data_komplek_val);
             $totW = 0;
             // count W
             foreach ($mergeW as $mergeWs) {
                 $totW = $totW + $mergeWs;
             }
             // devide SW and W
+            
             $result = $totSW / $totW;
+            // dd($result);
 
             // set value in variable
             $data_kasus_id = $item->id;
@@ -212,40 +227,42 @@ class AppController extends Controller
             $get_status = 'revise';
         }
         
-        // create new kasus
-        Kasus::create([
-            'pasien_id' => $request->pasien_id,
-            'user_id' => auth()->user()->id,
-            'penyakit_id' => $data_penyakit_id,
-            'similarity' => $data_result,
-            'status' => $get_status,
-        ]);
+        // // create new kasus
+        // Kasus::create([
+        //     'pasien_id' => $request->pasien_id,
+        //     'user_id' => auth()->user()->id,
+        //     'penyakit_id' => $data_penyakit_id,
+        //     'similarity' => $data_result,
+        //     'status' => $get_status,
+        // ]);
 
-        // get id form new kasus
-        $get_new_kasus_id = Kasus::orderByDesc('id')->first()->id;
+        // // get id form new kasus
+        // $get_new_kasus_id = Kasus::orderByDesc('id')->first()->id;
 
-        // add new gejala 
-        foreach ($request->gejala_id as $val_id_gejala) {
-            BasisPengetahuan::create([
-                'kasus_id' => $get_new_kasus_id,
-                'gejala_id' => $val_id_gejala,
-                'bobot_gejala_id' => BobotGejala::orderBy('bobot','asc')->first()->id,
-            ]);
-        }
-        // replace bobot with bobot gejala from case
-        foreach ($data_same_gejala as $val_id_gejala_same) {
-            $get_kasus_bobot = BasisPengetahuan::where('kasus_id', $data_kasus_id)->where('gejala_id', $val_id_gejala_same)->first();
-            $get_set_bobot = BasisPengetahuan::where('kasus_id', $get_new_kasus_id)->where('gejala_id', $val_id_gejala_same)->first();
-            $get_set_bobot->bobot_gejala_id = $get_kasus_bobot->bobot_gejala_id;
-            $get_set_bobot->save();
-        }
-        // add kompleksitas
-        foreach ($same_komplek as $req_komplek_val_item) {
-            BasisPengetahuanKompleksitas::create([
-                'kasus_id' => $get_new_kasus_id,
-                'kompleksitas_id' => $req_komplek_val_item,
-            ]);
-        }
+        // // add new gejala 
+        // foreach ($request->gejala_id as $val_id_gejala) {
+        //     BasisPengetahuan::create([
+        //         'kasus_id' => $get_new_kasus_id,
+        //         'gejala_id' => $val_id_gejala,
+        //         'bobot_gejala_id' => BobotGejala::orderBy('bobot','asc')->first()->id,
+        //     ]);
+        // }
+        // // replace bobot with bobot gejala from case
+        // foreach ($data_same_gejala as $val_id_gejala_same) {
+        //     $get_kasus_bobot = BasisPengetahuan::where('kasus_id', $data_kasus_id)->where('gejala_id', $val_id_gejala_same)->first();
+        //     $get_set_bobot = BasisPengetahuan::where('kasus_id', $get_new_kasus_id)->where('gejala_id', $val_id_gejala_same)->first();
+        //     $get_set_bobot->bobot_gejala_id = $get_kasus_bobot->bobot_gejala_id;
+        //     $get_set_bobot->save();
+        // }
+        // // add kompleksitas
+        // if (!is_null($same_komplek)) {
+        //     foreach ($same_komplek as $req_komplek_val_item) {
+        //         BasisPengetahuanKompleksitas::create([
+        //             'kasus_id' => $get_new_kasus_id,
+        //             'kompleksitas_id' => $req_komplek_val_item,
+        //         ]);
+        //     }
+        // }
         //return to hasil_pakar view
         return view('hasil_pakar', [
             'title' => 'Hasil Pakar',

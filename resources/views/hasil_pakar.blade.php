@@ -91,9 +91,13 @@
               <address>
                 <strong>Kompleksitas yang dipilih</strong><br>
                 <ul>
+                  @if (is_null($kompleksitas))
+                  <strong><li>Tidak ada yang dipilih</li></strong>
+                  @else
                   @foreach ($kompleksitas as $item)
                   <li>{{ $data_kompleksitas->where('id', $item)->first()->nama }}</li>
                   @endforeach
+                  @endif
                 </ul>
               </address>
             </div>
@@ -123,9 +127,11 @@
                         @foreach ($item['data_kasus_gejala'] as $itemg)
                         <li>{{ $data_gejala->where('id', $itemg)->first()->nama }}</li>
                         @endforeach
+                        @if (!is_null($item['data_kasus_kompleksitas']))
                         @foreach ($item['data_kasus_kompleksitas'] as $itemk)
                         <li>{{ $data_gejala->where('id', $itemk)->first()->nama }}</li>
                         @endforeach
+                        @endif
                       </ul>
                     </td>
                     <td>
@@ -133,9 +139,11 @@
                         @foreach ($item['data_same_gejala'] as $itemg)
                         <li>{{ $data_gejala->where('id', $itemg)->first()->nama }}</li>
                         @endforeach
+                        @if (!is_null($item['data_same_kompleksitas']))
                         @foreach ($item['data_same_kompleksitas'] as $itemk)
                         <li>{{ $data_gejala->where('id', $itemk)->first()->nama }}</li>
                         @endforeach
+                        @endif
                       </ul>
                     </td>
                     <td>{{ number_format($item['data_result'], 2) }} </td>
