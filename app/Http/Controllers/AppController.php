@@ -227,42 +227,42 @@ class AppController extends Controller
             $get_status = 'revise';
         }
         
-        // // create new kasus
-        // Kasus::create([
-        //     'pasien_id' => $request->pasien_id,
-        //     'user_id' => auth()->user()->id,
-        //     'penyakit_id' => $data_penyakit_id,
-        //     'similarity' => $data_result,
-        //     'status' => $get_status,
-        // ]);
+        // create new kasus
+        Kasus::create([
+            'pasien_id' => $request->pasien_id,
+            'user_id' => auth()->user()->id,
+            'penyakit_id' => $data_penyakit_id,
+            'similarity' => $data_result,
+            'status' => $get_status,
+        ]);
 
-        // // get id form new kasus
-        // $get_new_kasus_id = Kasus::orderByDesc('id')->first()->id;
+        // get id form new kasus
+        $get_new_kasus_id = Kasus::orderByDesc('id')->first()->id;
 
-        // // add new gejala 
-        // foreach ($request->gejala_id as $val_id_gejala) {
-        //     BasisPengetahuan::create([
-        //         'kasus_id' => $get_new_kasus_id,
-        //         'gejala_id' => $val_id_gejala,
-        //         'bobot_gejala_id' => BobotGejala::orderBy('bobot','asc')->first()->id,
-        //     ]);
-        // }
-        // // replace bobot with bobot gejala from case
-        // foreach ($data_same_gejala as $val_id_gejala_same) {
-        //     $get_kasus_bobot = BasisPengetahuan::where('kasus_id', $data_kasus_id)->where('gejala_id', $val_id_gejala_same)->first();
-        //     $get_set_bobot = BasisPengetahuan::where('kasus_id', $get_new_kasus_id)->where('gejala_id', $val_id_gejala_same)->first();
-        //     $get_set_bobot->bobot_gejala_id = $get_kasus_bobot->bobot_gejala_id;
-        //     $get_set_bobot->save();
-        // }
-        // // add kompleksitas
-        // if (!is_null($same_komplek)) {
-        //     foreach ($same_komplek as $req_komplek_val_item) {
-        //         BasisPengetahuanKompleksitas::create([
-        //             'kasus_id' => $get_new_kasus_id,
-        //             'kompleksitas_id' => $req_komplek_val_item,
-        //         ]);
-        //     }
-        // }
+        // add new gejala 
+        foreach ($request->gejala_id as $val_id_gejala) {
+            BasisPengetahuan::create([
+                'kasus_id' => $get_new_kasus_id,
+                'gejala_id' => $val_id_gejala,
+                'bobot_gejala_id' => BobotGejala::orderBy('bobot','asc')->first()->id,
+            ]);
+        }
+        // replace bobot with bobot gejala from case
+        foreach ($data_same_gejala as $val_id_gejala_same) {
+            $get_kasus_bobot = BasisPengetahuan::where('kasus_id', $data_kasus_id)->where('gejala_id', $val_id_gejala_same)->first();
+            $get_set_bobot = BasisPengetahuan::where('kasus_id', $get_new_kasus_id)->where('gejala_id', $val_id_gejala_same)->first();
+            $get_set_bobot->bobot_gejala_id = $get_kasus_bobot->bobot_gejala_id;
+            $get_set_bobot->save();
+        }
+        // add kompleksitas
+        if (!is_null($same_komplek)) {
+            foreach ($same_komplek as $req_komplek_val_item) {
+                BasisPengetahuanKompleksitas::create([
+                    'kasus_id' => $get_new_kasus_id,
+                    'kompleksitas_id' => $req_komplek_val_item,
+                ]);
+            }
+        }
         //return to hasil_pakar view
         return view('hasil_pakar', [
             'title' => 'Hasil Pakar',
