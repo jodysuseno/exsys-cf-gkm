@@ -85,25 +85,25 @@ class DatabaseSeeder extends Seeder
         //buat data pasien
         Pasien::create([
             'nomor_kartu_identitas' => '3514100102030001',
-            'nama' => 'pasien 1',
+            'nama' => 'lala',
             'umur' => '20',
             'phone' => '081234876098',
         ]);
         Pasien::create([
             'nomor_kartu_identitas' => '3514100102040001',
-            'nama' => 'pasien 2',
+            'nama' => 'adi',
             'umur' => '20',
             'phone' => '081234876098',
         ]);
         Pasien::create([
             'nomor_kartu_identitas' => '3514100102050001',
-            'nama' => 'pasien 3',
+            'nama' => 'amir',
             'umur' => '20',
             'phone' => '081234876098',
         ]);
         Pasien::create([
             'nomor_kartu_identitas' => '3514100102060001',
-            'nama' => 'pasien 4',
+            'nama' => 'budi',
             'umur' => '20',
             'phone' => '081234876098',
         ]);
