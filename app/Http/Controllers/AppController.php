@@ -221,11 +221,11 @@ class AppController extends Controller
         array_multisort($columns, SORT_DESC, $result_data);
 
         // difine status base similarity value
-        if ($data_result > 0.5) {
-            $get_status = 'reuse';
-        } else {
-            $get_status = 'revise';
-        }
+        // if ($data_result > 0.5) {
+        //     $get_status = 'reuse';
+        // } else {
+        //     $get_status = 'revise';
+        // }
         
         // create new kasus
         Kasus::create([
@@ -233,7 +233,8 @@ class AppController extends Controller
             'user_id' => auth()->user()->id,
             'penyakit_id' => $data_penyakit_id,
             'similarity' => $data_result,
-            'status' => $get_status,
+            'status' => 'reuse',
+            'keterangan' => 'selesai',
         ]);
 
         // get id form new kasus
@@ -279,6 +280,17 @@ class AppController extends Controller
             'data_kompleksitas' => BobotKompleksitas::all(),
             'kompleksitas' => $request->kompleksitas_id,
             'kasus' => $result_data,
+            'id_kasus' => $get_new_kasus_id,
         ]);
+    }
+
+    public function cek_sebagai_revise($id_kasus)
+    {
+        Kasus::where('id', $id_kasus)->update([
+            'status' => 'revise',
+            'keterangan' => 'tunggu',
+        ]);
+
+        return redirect()->route('data_revise');
     }
 }

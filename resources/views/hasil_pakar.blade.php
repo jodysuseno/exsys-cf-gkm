@@ -101,6 +101,14 @@
                 </ul>
               </address>
             </div>
+            <div class="col-12 text-right">
+              <a class="btn btn-primary" href="{{ route('sistem_pakar') }}"><i class="fa fa-arrow-left"></i> Kembali</a>
+              <form action="{{ route('cek_sebagai_revise', $id_kasus) }}" class="d-inline" method="post">
+                @csrf
+                @method('patch')
+                <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i> Tandai Sebagai revise</button>
+              </form>
+            </div>
             <hr>
             <div class="col-12 table-responsive">
               <strong> 5 Data Kasus dengan similaritas yang tinggi</strong><br>

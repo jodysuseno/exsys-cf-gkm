@@ -114,6 +114,7 @@ class DatabaseSeeder extends Seeder
             'penyakit_id' => 1,
             'similarity' => 1.00,
             'status' => 'reuse',
+            'keterangan' => 'selesai',
         ]);
         Kasus::create([
             'pasien_id' => 2,
@@ -121,6 +122,7 @@ class DatabaseSeeder extends Seeder
             'penyakit_id' => 2,
             'similarity' => 1.00,
             'status' => 'reuse',
+            'keterangan' => 'selesai',
         ]);
         Kasus::create([
             'pasien_id' => 3,
@@ -128,6 +130,7 @@ class DatabaseSeeder extends Seeder
             'penyakit_id' => 3,
             'similarity' => 1.00,
             'status' => 'reuse',
+            'keterangan' => 'selesai',
         ]);
         Kasus::create([
             'pasien_id' => 4,
@@ -135,6 +138,7 @@ class DatabaseSeeder extends Seeder
             'penyakit_id' => 4,
             'similarity' => 1.00,
             'status' => 'reuse',
+            'keterangan' => 'selesai',
         ]);
         //buat basis pengetahuan
         BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 2, 'bobot_gejala_id' => 2]);

@@ -38,9 +38,13 @@ Route::group(['middleware' => ['role:admin', 'auth']], function () {
   Route::get('/data_perawat', [UserController::class, 'perawat_index'])->name('perawat_index');
   Route::resource('/user', UserController::class);
 });
+Route::group(['middleware' => ['role:pakar,perawat', 'auth']], function () {
+  Route::get('/data_revise', [KasusController::class, 'data_revise'])->name('data_revise');
+});
 Route::group(['middleware' => ['role:perawat', 'auth']], function () {
   Route::get('/sistem_pakar', [AppController::class, 'sistem_pakar'])->name('sistem_pakar');
   Route::post('/hasil_pakar', [AppController::class, 'hasil_pakar'])->name('hasil_pakar');
+  Route::patch('/cek_sebagai_revise/{cek_sebagai_revise}', [AppController::class, 'cek_sebagai_revise'])->name('cek_sebagai_revise');
 });
 Route::group(['middleware' => ['role:pakar', 'auth']], function () {
   Route::resource('/gejala', GejalaController::class);
@@ -50,6 +54,7 @@ Route::group(['middleware' => ['role:pakar', 'auth']], function () {
   Route::resource('/kasus', KasusController::class);
   Route::resource('/basis_pengetahuan', BasisPengetahuanController::class);
   Route::resource('/basis_pengetahuan_kompleksitas', BasisPengetahuanKompleksitasController::class);
+  Route::patch('/ubah_keterangan/{id}', [KasusController::class, 'ubah_keterangan'])->name('ubah_keterangan');
 });
 
 Route::middleware(['guest'])->group(function () {

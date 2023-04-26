@@ -29,9 +29,15 @@
         <li><a class="treeview-item" href="{{ route('kompleksitas.index') }}"><i class="icon fa fa-stethoscope"></i> Data Kompleksitas</a></li>
       </ul>
     </li>
-    <li><a class="app-menu__item" href="{{ route('kasus.index') }}"><i class="app-menu__icon fa fa-lightbulb-o"></i><span class="app-menu__label">Basis Pengetahuan</span></a></li>
+    <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-lightbulb-o"></i><span class="app-menu__label">Basis Pengetahuan</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+      <ul class="treeview-menu">
+        <li><a class="treeview-item" href="{{ route('kasus.index') }}"><i class="icon fa fa-lightbulb-o"></i> Kasus</a></li>
+        <li><a class="treeview-item" href="{{ route('data_revise') }}"><i class="icon fa fa-lightbulb-o"></i> Kasus revise</a></li>
+      </ul>
+    </li>
     @elseif(auth()->user()->role == 'perawat')
     <li><a class="app-menu__item" href="{{ route('pasien.index') }}"><i class="app-menu__icon fa fa-wheelchair"></i><span class="app-menu__label">Data Pasien</span></a></li>
+    <li><a class="app-menu__item" href="{{ route('data_revise') }}"><i class="app-menu__icon fa fa-lightbulb-o"></i><span class="app-menu__label">Kasus revise</span></a></li>
     <li><a class="app-menu__item" href="{{ route('sistem_pakar') }}"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Konsultasi Evaluasi</span></a></li>
     @endif
   </ul>

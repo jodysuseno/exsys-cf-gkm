@@ -148,6 +148,33 @@ class KasusController extends Controller
         ]);
     }
 
+    public function data_revise()
+    {
+        return view('data_revise',[
+            'title' => 'Data revise',
+            'kasus' => Kasus::orderBy('id', 'desc')->orderBy('keterangan', 'desc')->get(),
+            'gejala' => BasisPengetahuan::all(),
+            'kompleksitas' => BasisPengetahuanKompleksitas::all(),
+        ]);
+    }
+
+    public function ubah_keterangan(Request $request, $id)
+    {
+        if ($request->keterangan == 'tunggu') {
+            $status = 'revise';
+        } else {
+            $status = 'reuse';
+        }
+        Kasus::where('id', $id)->update([
+            'keterangan' => $request->keterangan,
+            'status' => $status
+        ]);
+
+        return redirect()->route('data_revise');
+    }
+
+
+
     /**
      * Show the form for editing the specified resource.
      *
