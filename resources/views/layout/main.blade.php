@@ -54,68 +54,7 @@
     <!-- The javascript plugin to display page loading on top-->
     <script src="{{ asset('valiadmin/assets/js/plugins/pace.min.js') }}"></script>
     <!-- Page specific javascripts-->
-    <script type="text/javascript" src="{{ asset('valiadmin/assets/js/plugins/chart.js') }}"></script>
-    <script type="text/javascript">
-      @if (auth()->user()->role == "admin")
-      var user = {
-      	labels: ["Admin", "Pakar", "Perawat"],
-      	datasets: [
-      		{
-      			label: "User",
-      			fillColor: "#009688",
-      			pointStrokeColor: "#fff",
-      			pointHighlightFill: "#fff",
-      			pointHighlightStroke: "rgba(220,220,220,1)",
-      			data: [{{ $cnt_user_admin }}, {{ $cnt_user_pakar }}, {{ $cnt_user_perawat }}]
-      		}
-      	]
-      };
-
-      var ctxbbarChartUser = $("#barChart").get(0).getContext("2d");
-      var barChart = new Chart(ctxbbarChartUser).Bar(user);
-      @else
-
-      var kasus = {
-      	labels: [
-          @foreach ($penyakit as $item)
-          "{{ $item->nama }}",
-          @endforeach
-        ],
-      	datasets: [
-      		{
-      			label: "User",
-      			fillColor: "#009688",
-      			pointStrokeColor: "#fff",
-      			pointHighlightFill: "#fff",
-      			pointHighlightStroke: "rgba(220,220,220,1)",
-      			data: [
-              @foreach ($penyakit as $item)
-              {{ $kasus->where('penyakit_id', $item->id)->count() }},
-              @endforeach
-            ]
-      		}
-      	]
-      };
-      
-      // var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-      // var lineChart = new Chart(ctxl).Line(data);
-
-      var ctxbbarChartKasus = $("#barChart").get(0).getContext("2d");
-      var barChart = new Chart(ctxbbarChartKasus).Bar(kasus);
-      
-      // var ctxr = $("#radarChartDemo").get(0).getContext("2d");
-      // var radarChart = new Chart(ctxr).Radar(data);
-      
-      // var ctxpo = $("#polarChartDemo").get(0).getContext("2d");
-      // var polarChart = new Chart(ctxpo).PolarArea(pdata);
-      
-      // var ctxp = $("#pieChartDemo").get(0).getContext("2d");
-      // var pieChart = new Chart(ctxp).Pie(pdata);
-      
-      // var ctxd = $("#doughnutChartDemo").get(0).getContext("2d");
-      // var doughnutChart = new Chart(ctxd).Doughnut(pdata);
-      @endif
-    </script>
+    
     <!-- Google analytics script-->
     <script type="text/javascript">
       if(document.location.hostname == 'pratikborsadiya.in') {

@@ -8,11 +8,11 @@ use App\Models\BobotGejala;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\models\Kasus;
-use App\models\Gejala;
-use App\models\BobotKompleksitas;
+use App\Models\Kasus;
+use App\Models\Gejala;
+use App\Models\BobotKompleksitas;
 use App\Models\Pasien;
-use App\models\Penyakit;
+use App\Models\Penyakit;
 use Illuminate\Support\Facades\DB;
 
 class AppController extends Controller
@@ -20,6 +20,7 @@ class AppController extends Controller
     public function dashboard()
     {
         return view('dashboard', [
+            'title' => 'dashboard',
             'user' => User::orderByDesc('created_at')->get(),
             'kasus' => Kasus::orderByDesc('created_at')->get(),
             'penyakit' => Penyakit::orderByDesc('created_at')->get(),
