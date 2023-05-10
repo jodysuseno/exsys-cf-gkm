@@ -56,51 +56,65 @@
     <!-- Page specific javascripts-->
     <script type="text/javascript" src="{{ asset('valiadmin/assets/js/plugins/chart.js') }}"></script>
     <script type="text/javascript">
-      var data = {
-      	labels: ["January", "February", "March", "April", "May"],
+      @if (auth()->user()->role == "admin")
+      var user = {
+      	labels: ["Admin", "Pakar", "Perawat"],
       	datasets: [
       		{
-      			label: "My First dataset",
-      			fillColor: "rgba(220,220,220,0.2)",
-      			strokeColor: "rgba(220,220,220,1)",
-      			pointColor: "rgba(220,220,220,1)",
+      			label: "User",
+      			fillColor: "#009688",
       			pointStrokeColor: "#fff",
       			pointHighlightFill: "#fff",
       			pointHighlightStroke: "rgba(220,220,220,1)",
-      			data: [65, 59, 80, 81, 56]
-      		},
-      		{
-      			label: "My Second dataset",
-      			fillColor: "rgba(151,187,205,0.2)",
-      			strokeColor: "rgba(151,187,205,1)",
-      			pointColor: "rgba(151,187,205,1)",
-      			pointStrokeColor: "#fff",
-      			pointHighlightFill: "#fff",
-      			pointHighlightStroke: "rgba(151,187,205,1)",
-      			data: [28, 48, 40, 19, 86]
+      			data: [{{ $cnt_user_admin }}, {{ $cnt_user_pakar }}, {{ $cnt_user_perawat }}]
       		}
       	]
       };
-      var pdata = [
-      	{
-      		value: 300,
-      		color: "#46BFBD",
-      		highlight: "#5AD3D1",
-      		label: "Complete"
-      	},
-      	{
-      		value: 50,
-      		color:"#F7464A",
-      		highlight: "#FF5A5E",
-      		label: "In-Progress"
-      	}
-      ]
+
+      var ctxbbarChartUser = $("#barChart").get(0).getContext("2d");
+      var barChart = new Chart(ctxbbarChartUser).Bar(user);
+      @else
+
+      var kasus = {
+      	labels: [
+          @foreach ($penyakit as $item)
+          "{{ $item->nama }}",
+          @endforeach
+        ],
+      	datasets: [
+      		{
+      			label: "User",
+      			fillColor: "#009688",
+      			pointStrokeColor: "#fff",
+      			pointHighlightFill: "#fff",
+      			pointHighlightStroke: "rgba(220,220,220,1)",
+      			data: [
+              @foreach ($penyakit as $item)
+              {{ $kasus->where('penyakit_id', $item->id)->count() }},
+              @endforeach
+            ]
+      		}
+      	]
+      };
       
-      var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-      var lineChart = new Chart(ctxl).Line(data);
+      // var ctxl = $("#lineChartDemo").get(0).getContext("2d");
+      // var lineChart = new Chart(ctxl).Line(data);
+
+      var ctxbbarChartKasus = $("#barChart").get(0).getContext("2d");
+      var barChart = new Chart(ctxbbarChartKasus).Bar(kasus);
       
-      var ctxp = $("#pieChartDemo").get(0).getContext("2d");
-      var pieChart = new Chart(ctxp).Pie(pdata);
+      // var ctxr = $("#radarChartDemo").get(0).getContext("2d");
+      // var radarChart = new Chart(ctxr).Radar(data);
+      
+      // var ctxpo = $("#polarChartDemo").get(0).getContext("2d");
+      // var polarChart = new Chart(ctxpo).PolarArea(pdata);
+      
+      // var ctxp = $("#pieChartDemo").get(0).getContext("2d");
+      // var pieChart = new Chart(ctxp).Pie(pdata);
+      
+      // var ctxd = $("#doughnutChartDemo").get(0).getContext("2d");
+      // var doughnutChart = new Chart(ctxd).Doughnut(pdata);
+      @endif
     </script>
     <!-- Google analytics script-->
     <script type="text/javascript">

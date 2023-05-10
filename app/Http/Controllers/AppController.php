@@ -20,10 +20,13 @@ class AppController extends Controller
     public function dashboard()
     {
         return view('dashboard', [
-            'cnt_user' => User::count(),
-            'cnt_kasus' => Kasus::count(),
-            'cnt_gejala' => Gejala::count(),
-            'cnt_penyakit' => Penyakit::count(),
+            'user' => User::orderByDesc('created_at')->get(),
+            'kasus' => Kasus::orderByDesc('created_at')->get(),
+            'penyakit' => Penyakit::orderByDesc('created_at')->get(),
+            'cnt_user_admin' => User::where('role', 'admin')->count(),
+            'cnt_user_pakar' => User::where('role', 'pakar')->count(),
+            'cnt_user_perawat' => User::where('role', 'perawat')->count(),
+            'cnt_pasien' => Pasien::count(),
         ]);
     }
     public function login()
