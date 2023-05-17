@@ -20,8 +20,9 @@
                   <th>Tanggal Pemeriksaan</th>
                   <th>Nama Perawat</th>
                   <th>Gejala Yang dialami</th>
+                  <th>Catatan</th>
                   <th>Similarity</th>
-                  <th>Keterangan</th>
+                  <th>Option</th>
                 </tr>
               </thead>
               <tbody>
@@ -43,10 +44,17 @@
                       @endforelse
                     </ul>
                   </td>
+                  <td>
+                    @if ($item->note == '')
+                      <i style="color:rgb(189, 189, 189)">"Tidak Ada Catatan"</i> 
+                    @else
+                      {{ $item->note }}
+                    @endif
+                  </td>
                   <td>{{ $item->similarity }}</td>
                   <td>
                     @if (auth()->user()->role == 'pakar')
-                    <div class="dropdown open">
+                    {{-- <div class="dropdown open">
                       <button class="btn btn-sm @if($item->keterangan == 'tunggu') btn-warning @else btn-success @endif dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         @if($item->keterangan == 'tunggu') Tunggu @else Selesai @endif
                       </button>
@@ -64,7 +72,8 @@
                           <button type="submit" class="dropdown-item bg-success text-light">Selesai</button>
                         </form>
                       </div>
-                    </div>
+                    </div> --}}
+                    <a href="{{ route('detail_revise', $item->id) }}" class="btn btn-sm btn-secondary" ><i class="fa fa-eye"></i> Detail</a>
                     @elseif (auth()->user()->role == 'perawat')
                       @if ($item->keterangan == 'tunggu')
                         <span class="badge bg-warning">Tunggu</span>

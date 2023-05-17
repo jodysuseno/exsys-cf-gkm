@@ -19,7 +19,7 @@
               {{-- <h5 class="text-right">Date: 01/01/2016</h5> --}}
             </div>
           </div>
-          <div class="row invoice-info">
+          <div class="row invoice-info" id="expert_result_report">
             <div class="col-6">
               <address>
                 <strong>Data Pasien : </strong><br>
@@ -75,6 +75,9 @@
               </address>
             </div>
           </div>
+          <div class="row d-print-none mt-2">
+            <div class="col-12 text-right"><a class="btn btn-primary" onclick="printContent('expert_result_report')"><i class="fa fa-print"></i> Print</a></div>
+          </div>
           <hr>
           <div class="row">
             <div class="col-6">
@@ -101,14 +104,16 @@
                 </ul>
               </address>
             </div>
+            @if ($id_kasus->status == 'reuse')
             <div class="col-12 text-right">
               <a class="btn btn-primary" href="{{ route('sistem_pakar') }}"><i class="fa fa-arrow-left"></i> Kembali</a>
-              <form action="{{ route('cek_sebagai_revise', $id_kasus) }}" class="d-inline" method="post">
+              <form action="{{ route('cek_sebagai_revise', $id_kasus->id) }}" class="d-inline" method="post">
                 @csrf
                 @method('patch')
                 <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i> Tandai Sebagai revise</button>
               </form>
             </div>
+            @endif
             <hr>
             <div class="col-12 table-responsive">
               <strong> 5 Data Kasus dengan similaritas yang tinggi</strong><br>
@@ -162,12 +167,18 @@
               </table>
             </div>
           </div>
-          <div class="row d-print-none mt-2">
-            <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print();"><i class="fa fa-print"></i> Print</a></div>
-          </div>
         </section>
       </div>
     </div>
   </div>
 </main>
+<script>
+function printContent(el){
+  var restorepage = document.body.innerHTML;
+  var printcontent = document.getElementById(el).innerHTML;
+  document.body.innerHTML = printcontent;
+  window.print();
+  document.body.innerHTML = restorepage;
+}
+</script>
 @endsection

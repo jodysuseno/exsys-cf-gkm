@@ -40,6 +40,8 @@ Route::group(['middleware' => ['role:admin', 'auth']], function () {
 });
 Route::group(['middleware' => ['role:pakar,perawat', 'auth']], function () {
   Route::get('/data_revise', [KasusController::class, 'data_revise'])->name('data_revise');
+  Route::get('/detail_revise/{id}', [KasusController::class, 'detail_revise'])->name('detail_revise');
+  Route::put('/save_revise_note/{id}', [KasusController::class, 'save_revise_note'])->name('save_revise_note');
 });
 Route::group(['middleware' => ['role:perawat', 'auth']], function () {
   Route::get('/sistem_pakar', [AppController::class, 'sistem_pakar'])->name('sistem_pakar');

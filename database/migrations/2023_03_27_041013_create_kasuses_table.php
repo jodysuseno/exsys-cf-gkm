@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreign('pasien_id')->references('id')->on('pasiens')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('penyakit_id')->references('id')->on('penyakits')->onDelete('cascade')->onUpdate('cascade');
+            $table->text('note')->nullable();
             $table->enum('status', ['reuse','revise']);
             $table->enum('keterangan', ['selesai','tunggu']);
             $table->timestamps();

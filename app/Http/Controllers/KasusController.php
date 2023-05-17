@@ -150,12 +150,48 @@ class KasusController extends Controller
 
     public function data_revise()
     {
-        return view('data_revise',[
+        return view('revise.index',[
             'title' => 'Data revise',
             'kasus' => Kasus::orderBy('id', 'desc')->orderBy('keterangan', 'desc')->get(),
             'gejala' => BasisPengetahuan::all(),
             'kompleksitas' => BasisPengetahuanKompleksitas::all(),
         ]);
+    }
+
+    public function detail_revise($id)
+    {
+        $gejala = Gejala::all();
+        $basis_gejala = BasisPengetahuan::where('kasus_id', $id)->get();
+        $kompleksitas = BobotKompleksitas::all();
+        $basis_kompleksitas = BasisPengetahuanKompleksitas::where('kasus_id', $id)->get();
+
+        $slc_gejala = $this->get_diff_select($basis_gejala, $gejala);
+        $slc_kompleksitas = $this->get_diff_selectk($basis_kompleksitas, $kompleksitas);
+
+
+
+
+        return view('revise.show',[
+            'title' => 'Data Detail Revise',
+            'kasus' => Kasus::where('id',$id)->first(),
+            'slc_gejala' => $slc_gejala,
+            'gejala' => Gejala::all(),
+            'bobot_gejala' => BobotGejala::all(),
+            'slc_kompleksitas' => $slc_kompleksitas,
+            'kompleksitas' => BobotKompleksitas::all(),
+            'bp_gejala' => BasisPengetahuan::where('kasus_id', $id)->get(),
+            'bp_kompleksitas' => BasisPengetahuanKompleksitas::where('kasus_id', $id)->get(),
+            'note' => Kasus::where('id', $id)->first()->note,
+        ]);
+    }
+
+    public function save_revise_note(Request $request, $id)
+    {
+        $get_kasus = Kasus::where('id', $id)->first();
+        $get_kasus->note = $request->note;
+        $get_kasus->save();
+
+        return redirect()->route('detail_revise', $id);
     }
 
     public function ubah_keterangan(Request $request, $id)

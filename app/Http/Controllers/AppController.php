@@ -225,11 +225,11 @@ class AppController extends Controller
         array_multisort($columns, SORT_DESC, $result_data);
 
         // difine status base similarity value
-        // if ($data_result > 0.5) {
-        //     $get_status = 'reuse';
-        // } else {
-        //     $get_status = 'revise';
-        // }
+        if ($data_result < 0.5) {
+            $get_status = 'revise';
+        } else {
+            $get_status = 'reuse';
+        }
         
         // create new kasus
         Kasus::create([
@@ -237,17 +237,17 @@ class AppController extends Controller
             'user_id' => auth()->user()->id,
             'penyakit_id' => $data_penyakit_id,
             'similarity' => $data_result,
-            'status' => 'reuse',
+            'status' => $get_status,
             'keterangan' => 'selesai',
         ]);
 
         // get id form new kasus
-        $get_new_kasus_id = Kasus::orderByDesc('id')->first()->id;
+        $get_new_kasus_id = Kasus::orderByDesc('id')->first();
 
         // add new gejala 
         foreach ($request->gejala_id as $val_id_gejala) {
             BasisPengetahuan::create([
-                'kasus_id' => $get_new_kasus_id,
+                'kasus_id' => $get_new_kasus_id->id,
                 'gejala_id' => $val_id_gejala,
                 'bobot_gejala_id' => BobotGejala::orderBy('bobot','asc')->first()->id,
             ]);
@@ -255,7 +255,7 @@ class AppController extends Controller
         // replace bobot with bobot gejala from case
         foreach ($data_same_gejala as $val_id_gejala_same) {
             $get_kasus_bobot = BasisPengetahuan::where('kasus_id', $data_kasus_id)->where('gejala_id', $val_id_gejala_same)->first();
-            $get_set_bobot = BasisPengetahuan::where('kasus_id', $get_new_kasus_id)->where('gejala_id', $val_id_gejala_same)->first();
+            $get_set_bobot = BasisPengetahuan::where('kasus_id', $get_new_kasus_id->id)->where('gejala_id', $val_id_gejala_same)->first();
             $get_set_bobot->bobot_gejala_id = $get_kasus_bobot->bobot_gejala_id;
             $get_set_bobot->save();
         }
@@ -263,7 +263,7 @@ class AppController extends Controller
         if (!is_null($same_komplek)) {
             foreach ($same_komplek as $req_komplek_val_item) {
                 BasisPengetahuanKompleksitas::create([
-                    'kasus_id' => $get_new_kasus_id,
+                    'kasus_id' => $get_new_kasus_id->id,
                     'kompleksitas_id' => $req_komplek_val_item,
                 ]);
             }
