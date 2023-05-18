@@ -11,72 +11,74 @@
     <div class="col-md-12">
       <div class="tile">
         <section class="invoice">
-          <div class="row mb-4">
-            <div class="col-6">
-              <h2 class="page-header"><i class="fa fa-file-text-o"></i> Hasil Pakar</h2>
+          <div id="expert_result_report">
+            <div class="row mb-4">
+              <div class="col-6">
+                <h2 class="page-header"><i class="fa fa-file-text-o"></i> Hasil Pakar</h2>
+              </div>
+              <div class="col-6">
+                {{-- <h5 class="text-right">Date: 01/01/2016</h5> --}}
+              </div>
             </div>
-            <div class="col-6">
-              {{-- <h5 class="text-right">Date: 01/01/2016</h5> --}}
-            </div>
-          </div>
-          <div class="row invoice-info" id="expert_result_report">
-            <div class="col-6">
-              <address>
-                <strong>Data Pasien : </strong><br>
-                <table>
-                  <tr>
-                    <td>Nomor kartu identitas</td>
-                    <td>:</td>
-                    <td>{{ $pasien_kartu_identitas }}</td>
-                  </tr>
-                  <tr>
-                    <td>Nama </td>
-                    <td>:</td>
-                    <td>{{ $pasien_nama }}</td>
-                  </tr>
-                  <tr>
-                    <td>Umur </td>
-                    <td>:</td>
-                    <td>{{ $pasien_umur }}</td>
-                  </tr>
-                  <tr>
-                    <td>Phone </td>
-                    <td>:</td>
-                    <td>{{ $pasien_phone }}</td>
-                  </tr>
-                </table>
-              </address>
-            </div>
-            <div class="col-6">
-              <address>
-                <strong>Hasil Diagnosa</strong><br>
-                <table>
-                  <tr>
-                    <td>Penyakit </td>
-                    <td>:</td>
-                    <td>{{ $diagnosa_penyakit }}</td>
-                  </tr>
-                  <tr>
-                    <td>Nilai Similarity </td>
-                    <td>:</td>
-                    <td><strong> {{ number_format($diagnosa_nilai_similarity, 2) }} </strong></td>
-                  </tr>
-                  <tr>
-                    <td>Definisi Penyakit </td>
-                    <td>:</td>
-                    <td>{{ $data_penyakit_devinisi }}</td>
-                  </tr>
-                  <tr>
-                    <td>Solusi </td>
-                    <td>:</td>
-                    <td>{{ $data_penyakit_solusi }}</td>
-                  </tr>
-                </table>
-              </address>
+            <div class="row invoice-info">
+              <div class="col-6">
+                <address>
+                  <strong>Data Pasien : </strong><br>
+                  <table>
+                    <tr>
+                      <td>Nomor kartu identitas</td>
+                      <td>:</td>
+                      <td>{{ $pasien_kartu_identitas }}</td>
+                    </tr>
+                    <tr>
+                      <td>Nama </td>
+                      <td>:</td>
+                      <td>{{ $pasien_nama }}</td>
+                    </tr>
+                    <tr>
+                      <td>Umur </td>
+                      <td>:</td>
+                      <td>{{ $pasien_umur }}</td>
+                    </tr>
+                    <tr>
+                      <td>Phone </td>
+                      <td>:</td>
+                      <td>{{ $pasien_phone }}</td>
+                    </tr>
+                  </table>
+                </address>
+              </div>
+              <div class="col-6">
+                <address>
+                  <strong>Hasil Diagnosa</strong><br>
+                  <table>
+                    <tr>
+                      <td>Penyakit </td>
+                      <td>:</td>
+                      <td>{{ $diagnosa_penyakit }}</td>
+                    </tr>
+                    <tr>
+                      <td>Nilai Similarity </td>
+                      <td>:</td>
+                      <td><strong> {{ number_format($diagnosa_nilai_similarity, 2) }} </strong></td>
+                    </tr>
+                    <tr>
+                      <td>Definisi Penyakit </td>
+                      <td>:</td>
+                      <td>{{ $data_penyakit_devinisi }}</td>
+                    </tr>
+                    <tr>
+                      <td>Solusi </td>
+                      <td>:</td>
+                      <td>{{ $data_penyakit_solusi }}</td>
+                    </tr>
+                  </table>
+                </address>
+              </div>
             </div>
           </div>
           <div class="row d-print-none mt-2">
-            <div class="col-12 text-right"><a class="btn btn-primary" onclick="printContent('expert_result_report')"><i class="fa fa-print"></i> Print</a></div>
+            <div class="col-12 text-right"><a class="btn btn-primary text-light" onclick="printContent('expert_result_report')"><i class="fa fa-print"></i> Print</a></div>
           </div>
           <hr>
           <div class="row">
@@ -104,16 +106,16 @@
                 </ul>
               </address>
             </div>
-            @if ($id_kasus->status == 'reuse')
             <div class="col-12 text-right">
               <a class="btn btn-primary" href="{{ route('sistem_pakar') }}"><i class="fa fa-arrow-left"></i> Kembali</a>
+              @if ($id_kasus->status == 'reuse')
               <form action="{{ route('cek_sebagai_revise', $id_kasus->id) }}" class="d-inline" method="post">
                 @csrf
                 @method('patch')
                 <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i> Tandai Sebagai revise</button>
               </form>
+              @endif
             </div>
-            @endif
             <hr>
             <div class="col-12 table-responsive">
               <strong> 5 Data Kasus dengan similaritas yang tinggi</strong><br>

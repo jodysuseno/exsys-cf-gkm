@@ -70,7 +70,7 @@ class AppController extends Controller
         ]);
 
         // get data kasus
-        $kasus = Kasus::where('status', 'reuse')->get();
+        $kasus = Kasus::where('keterangan', 'selesai')->get();
         //set array variabel
         // $kasus_id = array();
         $data_penyakit_id = array();
@@ -224,12 +224,6 @@ class AppController extends Controller
         $columns = array_column($result_data, 'data_result');
         array_multisort($columns, SORT_DESC, $result_data);
 
-        // difine status base similarity value
-        if ($data_result < 0.5) {
-            $get_status = 'revise';
-        } else {
-            $get_status = 'reuse';
-        }
         
         // create new kasus
         Kasus::create([
@@ -237,12 +231,19 @@ class AppController extends Controller
             'user_id' => auth()->user()->id,
             'penyakit_id' => $data_penyakit_id,
             'similarity' => $data_result,
-            'status' => $get_status,
+            'status' => 'reuse',
             'keterangan' => 'selesai',
         ]);
 
         // get id form new kasus
         $get_new_kasus_id = Kasus::orderByDesc('id')->first();
+        
+        // if similarity < 0.5
+        if ($data_result < 0.5) {
+            $get_new_kasus_id->status = 'revise';
+            $get_new_kasus_id->keterangan = 'tunggu';
+            $get_new_kasus_id->save();
+        }
 
         // add new gejala 
         foreach ($request->gejala_id as $val_id_gejala) {

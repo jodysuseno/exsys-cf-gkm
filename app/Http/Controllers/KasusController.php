@@ -152,7 +152,7 @@ class KasusController extends Controller
     {
         return view('revise.index',[
             'title' => 'Data revise',
-            'kasus' => Kasus::orderBy('id', 'desc')->orderBy('keterangan', 'desc')->get(),
+            'kasus' => Kasus::where('status', 'revise')->orderBy('id', 'desc')->get(),
             'gejala' => BasisPengetahuan::all(),
             'kompleksitas' => BasisPengetahuanKompleksitas::all(),
         ]);
@@ -191,19 +191,13 @@ class KasusController extends Controller
         $get_kasus->note = $request->note;
         $get_kasus->save();
 
-        return redirect()->route('detail_revise', $id);
+        return redirect()->route('data_revise');
     }
 
     public function ubah_keterangan(Request $request, $id)
     {
-        if ($request->keterangan == 'tunggu') {
-            $status = 'revise';
-        } else {
-            $status = 'reuse';
-        }
         Kasus::where('id', $id)->update([
             'keterangan' => $request->keterangan,
-            'status' => $status
         ]);
 
         return redirect()->route('data_revise');

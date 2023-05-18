@@ -22,7 +22,10 @@
                   <th>Gejala Yang dialami</th>
                   <th>Catatan</th>
                   <th>Similarity</th>
+                  @if (auth()->user()->role == 'pakar')
                   <th>Option</th>
+                  @endif
+                  <th>Ketarangan</th>
                 </tr>
               </thead>
               <tbody>
@@ -52,28 +55,36 @@
                     @endif
                   </td>
                   <td>{{ $item->similarity }}</td>
+                  @if (auth()->user()->role == 'pakar')
+                  <td>
+                    <a href="{{ route('detail_revise', $item->id) }}" class="btn btn-sm btn-secondary" ><i class="fa fa-eye"></i> Detail</a>
+                  </td>
+                  @endif
                   <td>
                     @if (auth()->user()->role == 'pakar')
-                    {{-- <div class="dropdown open">
-                      <button class="btn btn-sm @if($item->keterangan == 'tunggu') btn-warning @else btn-success @endif dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @if($item->keterangan == 'tunggu') Tunggu @else Selesai @endif
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="triggerId">
-                        <form action="{{ route('ubah_keterangan', $item->id) }}" method="post">
-                          @csrf
-                          @method('patch')
-                          <input type="hidden" name="keterangan" value="tunggu">
-                          <button type="submit" class="dropdown-item bg-warning">Tunggu</button>
-                        </form>
-                        <form action="{{ route('ubah_keterangan', $item->id) }}" method="post">
-                          @csrf
-                          @method('patch')
-                          <input type="hidden" name="keterangan" value="selesai">
-                          <button type="submit" class="dropdown-item bg-success text-light">Selesai</button>
-                        </form>
+                      @if ($item->keterangan == 'tunggu')
+                      <div class="dropdown open">
+                        <button class="btn btn-sm @if($item->keterangan == 'tunggu') btn-warning @else btn-success @endif dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          @if($item->keterangan == 'tunggu') Tunggu @else Selesai @endif
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                          <form action="{{ route('ubah_keterangan', $item->id) }}" method="post">
+                            @csrf
+                            @method('patch')
+                            <input type="hidden" name="keterangan" value="tunggu">
+                            <button type="submit" class="dropdown-item bg-warning">Tunggu</button>
+                          </form>
+                          <form action="{{ route('ubah_keterangan', $item->id) }}" method="post">
+                            @csrf
+                            @method('patch')
+                            <input type="hidden" name="keterangan" value="selesai">
+                            <button type="submit" class="dropdown-item bg-success text-light">Selesai</button>
+                          </form>
+                        </div>
                       </div>
-                    </div> --}}
-                    <a href="{{ route('detail_revise', $item->id) }}" class="btn btn-sm btn-secondary" ><i class="fa fa-eye"></i> Detail</a>
+                      @else 
+                        <span class="badge bg-success text-light">Selesai</span>
+                      @endif
                     @elseif (auth()->user()->role == 'perawat')
                       @if ($item->keterangan == 'tunggu')
                         <span class="badge bg-warning">Tunggu</span>
@@ -85,7 +96,7 @@
                 </tr>
                 @empty
                 <tr>
-                  <td colspan="6">Data Tidak Tersedia</td>
+                  <td colspan="9">Data Tidak Tersedia</td>
                 </tr>
                 @endforelse
               </tbody>
