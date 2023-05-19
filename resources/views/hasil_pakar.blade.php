@@ -144,7 +144,7 @@
                         @endforeach
                         @if (!is_null($item['data_kasus_kompleksitas']))
                         @foreach ($item['data_kasus_kompleksitas'] as $itemk)
-                        <li>{{ $data_gejala->where('id', $itemk)->first()->nama }}</li>
+                        <li>{{ $data_kompleksitas->where('id', $itemk)->first()->nama }}</li>
                         @endforeach
                         @endif
                       </ul>
@@ -156,7 +156,7 @@
                         @endforeach
                         @if (!is_null($item['data_same_kompleksitas']))
                         @foreach ($item['data_same_kompleksitas'] as $itemk)
-                        <li>{{ $data_gejala->where('id', $itemk)->first()->nama }}</li>
+                        <li>{{ $data_kompleksitas->where('id', $itemk)->first()->nama }}</li>
                         @endforeach
                         @endif
                       </ul>
