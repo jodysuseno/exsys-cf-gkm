@@ -21,14 +21,14 @@
     @elseif(auth()->user()->role == 'pakar')
     <li><a class="app-menu__item" href="{{ route('pasien.index') }}"><i class="app-menu__icon fa fa-wheelchair"></i><span class="app-menu__label">Data Pasien</span></a></li>
     <li><a class="app-menu__item" href="{{ route('penyakit.index') }}"><i class="app-menu__icon fa fa-heartbeat"></i><span class="app-menu__label">Data Penyakit</span></a></li>
-    <!-- <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-stethoscope"></i><span class="app-menu__label">Gejala dan Rekam Medis</span><i class="treeview-indicator fa fa-angle-right"></i></a> -->
-      <!-- <ul class="treeview-menu">
+    {{-- <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-stethoscope"></i><span class="app-menu__label">Gejala dan Rekam Medis</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+      <ul class="treeview-menu">
         <li><a class="treeview-item" href="{{ route('gejala.index') }}"><i class="icon fa fa-stethoscope"></i> Data Gejala</a></li>
         <li><a class="treeview-item" href="{{ route('bobot_gejala.index') }}"><i class="icon fa fa-stethoscope"></i> Data Bobot Gejala</a></li>
         <hr class="mt-1 mb-1 bg-secondary">
         <li><a class="treeview-item" href="{{ route('kompleksitas.index') }}"><i class="icon fa fa-stethoscope"></i> Data Rekam Medis</a></li>
-      </ul> -->
-    </li>
+      </ul>
+    </li> --}}
     <li><a class="app-menu__item" href="{{ route('gejala.index') }}"><i class="app-menu__icon fa fa-stethoscope"></i><span class="app-menu__label">Data Gejala</span></a></li>
     <li><a class="app-menu__item" href="{{ route('bobot_gejala.index') }}"><i class="app-menu__icon fa fa-stethoscope"></i><span class="app-menu__label">Data Bobot Gejala</span></a></li>
     <li><a class="app-menu__item" href="{{ route('kompleksitas.index') }}"><i class="app-menu__icon fa fa-stethoscope"></i><span class="app-menu__label">Data Rekam Medis</span></a></li>
@@ -42,10 +42,14 @@
     @elseif(auth()->user()->role == 'perawat')
     <li><a class="app-menu__item" href="{{ route('pasien.index') }}"><i class="app-menu__icon fa fa-wheelchair"></i><span class="app-menu__label">Data Pasien</span></a></li>
     <li><a class="app-menu__item" href="{{ route('data_revise') }}"><i class="app-menu__icon fa fa-lightbulb-o"></i><span class="app-menu__label">Kasus revise</span></a></li>
-    <li><a class="app-menu__item" href="{{ route('kasus.index') }}"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Kasus</span></a></li>
+    {{-- <li><a class="app-menu__item" href="{{ route('kasus.index') }}"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Kasus</span></a></li> --}}
+    <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-lightbulb-o"></i><span class="app-menu__label">Basis Pengetahuan</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+      <ul class="treeview-menu">
+        <li><a class="treeview-item" href="{{ route('kasus.index') }}"><i class="icon fa fa-lightbulb-o"></i> Kasus</a></li>
+        <li><a class="treeview-item" href="{{ route('data_revise') }}"><i class="icon fa fa-lightbulb-o"></i> Kasus revise</a></li>
+      </ul>
+    </li>
     <li><a class="app-menu__item" href="{{ route('sistem_pakar') }}"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Konsultasi Evaluasi</span></a></li>
-
-    
     @endif
   </ul>
 </aside>

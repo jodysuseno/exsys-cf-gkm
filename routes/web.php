@@ -42,6 +42,10 @@ Route::group(['middleware' => ['role:pakar,perawat', 'auth']], function () {
   Route::get('/data_revise', [KasusController::class, 'data_revise'])->name('data_revise');
   Route::get('/detail_revise/{id}', [KasusController::class, 'detail_revise'])->name('detail_revise');
   Route::put('/save_revise_note/{id}', [KasusController::class, 'save_revise_note'])->name('save_revise_note');
+  Route::resource('/kasus', KasusController::class);
+  Route::resource('/basis_pengetahuan', BasisPengetahuanController::class);
+  Route::resource('/basis_pengetahuan_kompleksitas', BasisPengetahuanKompleksitasController::class);
+  Route::patch('/ubah_keterangan/{id}', [KasusController::class, 'ubah_keterangan'])->name('ubah_keterangan');
 });
 Route::group(['middleware' => ['role:perawat', 'auth']], function () {
   Route::get('/sistem_pakar', [AppController::class, 'sistem_pakar'])->name('sistem_pakar');
@@ -53,10 +57,6 @@ Route::group(['middleware' => ['role:pakar', 'auth']], function () {
   Route::resource('/bobot_gejala', BobotGejalaController::class);
   Route::resource('/kompleksitas', BobotkompleksitasController::class);
   Route::resource('/penyakit', PenyakitController::class);
-  Route::resource('/kasus', KasusController::class);
-  Route::resource('/basis_pengetahuan', BasisPengetahuanController::class);
-  Route::resource('/basis_pengetahuan_kompleksitas', BasisPengetahuanKompleksitasController::class);
-  Route::patch('/ubah_keterangan/{id}', [KasusController::class, 'ubah_keterangan'])->name('ubah_keterangan');
 });
 
 Route::middleware(['guest'])->group(function () {
