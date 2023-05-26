@@ -41,7 +41,7 @@
   </div>
   @if (auth()->user()->role == 'admin')
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-sm-12 col-md-12 col-lg-6">
       <div class="tile">
         <h3 class="tile-title">DATA USER</h3>
         <div class="tile-body">
@@ -74,7 +74,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-sm-12 col-md-12 col-lg-6">
       <div class="tile">
         <h3 class="tile-title">Diagaram Jumlah User</h3>
         <div class="embed-responsive embed-responsive-16by9">
@@ -177,24 +177,10 @@
       }
     ]
   };
-  
-  // var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-  // var lineChart = new Chart(ctxl).Line(data);
 
   var ctxbbarChartKasus = $("#barChart").get(0).getContext("2d");
   var barChart = new Chart(ctxbbarChartKasus).Bar(kasus);
-  
-  // var ctxr = $("#radarChartDemo").get(0).getContext("2d");
-  // var radarChart = new Chart(ctxr).Radar(data);
-  
-  // var ctxpo = $("#polarChartDemo").get(0).getContext("2d");
-  // var polarChart = new Chart(ctxpo).PolarArea(pdata);
-  
-  // var ctxp = $("#pieChartDemo").get(0).getContext("2d");
-  // var pieChart = new Chart(ctxp).Pie(pdata);
-  
-  // var ctxd = $("#doughnutChartDemo").get(0).getContext("2d");
-  // var doughnutChart = new Chart(ctxd).Doughnut(pdata);
+
   @endif
 </script>
 @endsection

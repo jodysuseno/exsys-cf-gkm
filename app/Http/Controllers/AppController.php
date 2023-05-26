@@ -110,7 +110,7 @@ class AppController extends Controller
             }
             // count similarity
             // merge data from gejala and kompleksitas
-            
+
             if (is_null($request->kompleksitas_id)) {
                 $mergeSW = $req_gejala_val;
                 $mergeW = $data_gejala_val;
@@ -146,7 +146,7 @@ class AppController extends Controller
             }
 
             // $mergeSW = array_merge($req_gejala_val, $req_komplek_val);
-            
+
             $totSW = 0;
             // count SW
             foreach ($mergeSW as $mergeSWs) {
@@ -159,7 +159,7 @@ class AppController extends Controller
                 $totW = $totW + $mergeWs;
             }
             // devide SW and W
-            
+
             $result = $totSW / $totW;
             // dd($result);
 
@@ -221,10 +221,18 @@ class AppController extends Controller
             }
         }
         $result_data;
+
+
         $columns = array_column($result_data, 'data_result');
         array_multisort($columns, SORT_DESC, $result_data);
 
-        
+        // dd([
+        //     $result_data[0]["data_result"],
+        //     $data_result,
+        //     $result_data[0]['data_penyakit_id'],
+        //     $data_penyakit_id
+        // ]);
+
         // create new kasus
         Kasus::create([
             'pasien_id' => $request->pasien_id,
@@ -237,11 +245,17 @@ class AppController extends Controller
 
         // get id form new kasus
         $get_new_kasus_id = Kasus::orderByDesc('id')->first();
-        
+
         // if similarity < 0.5
         if ($data_result < 0.5) {
             $get_new_kasus_id->status = 'revise';
             $get_new_kasus_id->keterangan = 'tunggu';
+            $get_new_kasus_id->save();
+        }
+
+        // jika similarity sama tetapi penyakitnya berbeda akan di ubah menjadi revise
+        if (($result_data[0]["data_result"] == $data_result) && ($result_data[0]['data_penyakit_name'] != $data_penyakit_name)) {
+            $get_new_kasus_id->status = 'revise';
             $get_new_kasus_id->save();
         }
 
@@ -250,7 +264,7 @@ class AppController extends Controller
             BasisPengetahuan::create([
                 'kasus_id' => $get_new_kasus_id->id,
                 'gejala_id' => $val_id_gejala,
-                'bobot_gejala_id' => BobotGejala::orderBy('bobot','asc')->first()->id,
+                'bobot_gejala_id' => BobotGejala::orderBy('bobot', 'asc')->first()->id,
             ]);
         }
         // replace bobot with bobot gejala from case
