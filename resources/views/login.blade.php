@@ -15,9 +15,9 @@
       <div class="cover"></div>
     </section>
     <section class="login-content">
-      <div class="logo">
+      <!-- <div class="logo">
         <h1>Vali</h1>
-      </div>
+      </div> -->
       <div class="login-box h-5">
         <form class="login-form" action="{{ route('proses_login') }}" method="POST">
           @csrf

@@ -32,13 +32,15 @@
       <a href="#" style="text-decoration: none;">
         <div class="widget-small warning coloured-icon"><i class="icon fa fa-newspaper-o fa-3x"></i>
           <div class="info">
-            <h4>DATA PASIEN</h4>
-            <p><b>{{ $cnt_pasien }}</b></p>
+            <h4>DATA PENYAKIT</h4>
+            <p><b>{{ $cnt_penyakit }}</b></p>
           </div>
         </div>
       </a>
     </div>
   </div>
+ 
+
   @if (auth()->user()->role == 'admin')
   <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-6">

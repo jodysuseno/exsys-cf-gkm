@@ -27,6 +27,7 @@ class AppController extends Controller
             'cnt_user_admin' => User::where('role', 'admin')->count(),
             'cnt_user_pakar' => User::where('role', 'pakar')->count(),
             'cnt_user_perawat' => User::where('role', 'perawat')->count(),
+            'cnt_penyakit' => Penyakit::orderByDesc('role', 'penyakit')->count(),
             'cnt_pasien' => Pasien::count(),
         ]);
     }
