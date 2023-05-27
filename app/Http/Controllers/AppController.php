@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\DB;
 
 class AppController extends Controller
 {
+    public function index()
+    {
+        return view('index', [
+            'title' => 'Selamat Datang'
+        ]);
+    }
+
     public function dashboard()
     {
         return view('dashboard', [

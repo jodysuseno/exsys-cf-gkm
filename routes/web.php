@@ -27,7 +27,6 @@ use App\Http\Controllers\BasisPengetahuanKompleksitasController;
 //     return view('welcome');
 // });
 Route::group(['middleware' => ['role:admin,pakar,perawat', 'auth']], function () {
-  Route::get('/', [AppController::class, 'dashboard'])->name('dashboard');
   Route::get('/dashboard', [AppController::class, 'dashboard'])->name('dashboard');
   Route::resource('/pasien', PasienController::class);
 });
@@ -62,6 +61,7 @@ Route::group(['middleware' => ['role:pakar', 'auth']], function () {
 Route::middleware(['guest'])->group(function () {
   Route::get('/login', [AppController::class, 'login'])->name('login'); 
   Route::post('/proses_login', [AppController::class, 'proses_login'])->name('proses_login'); 
+  Route::get('/', [AppController::class, 'index'])->name('index');
 });
 
 Route::get('/logout', [AppController::class, 'logout'])->name('logout');

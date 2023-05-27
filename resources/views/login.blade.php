@@ -42,6 +42,7 @@
           </div>
           <div class="form-group btn-container">
             <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+            <a href="{{ route('index') }}" class="btn btn-secondary btn-block"><i class="fa fa-home fa-lg fa-fw"></i>HOME</a>
           </div>
         </form>
       </div>
