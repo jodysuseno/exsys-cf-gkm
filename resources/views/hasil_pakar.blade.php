@@ -14,7 +14,7 @@
           <div id="expert_result_report">
             <div class="row mb-4">
               <div class="col-6">
-                <h2 class="page-header"><i class="fa fa-file-text-o"></i> Hasil Pakar</h2>
+                <h2 class="page-header"><i class="fa fa-file-text-o"></i> Hasil Diagnosa</h2>
               </div>
               <div class="col-6">
                 {{-- <h5 class="text-right">Date: 01/01/2016</h5> --}}
@@ -94,7 +94,7 @@
             </div>
             <div class="col-6">
               <address>
-                <strong>Kompleksitas yang dipilih</strong><br>
+                <strong>Rekam Medis yang dipilih</strong><br>
                 <ul>
                   @if (is_null($kompleksitas))
                   <strong><li>Tidak ada yang dipilih</li></strong>
@@ -109,11 +109,11 @@
             <div class="col-12 text-right">
               <a class="btn btn-primary" href="{{ route('sistem_pakar') }}"><i class="fa fa-arrow-left"></i> Kembali</a>
               @if ($id_kasus->status == 'reuse')
-              <form action="{{ route('cek_sebagai_revise', $id_kasus->id) }}" class="d-inline" method="post">
+              <!-- <form action="{{ route('cek_sebagai_revise', $id_kasus->id) }}" class="d-inline" method="post">
                 @csrf
                 @method('patch')
                 <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i> Tandai Sebagai revise</button>
-              </form>
+              </form> -->
               @endif
             </div>
             <hr>
@@ -125,8 +125,8 @@
                     <th>No</th>
                     <th>Pasien</th>
                     <th>Penyakit</th>
-                    <th>Gejala dan Kompleksitas pada kasus</th>
-                    <th>Gejala dan Kompleksitas yang Sama</th>
+                    <th>Gejala dan Rekam Medis pada kasus</th>
+                    <th>Gejala dan Rekam Medis yang Sama</th>
                     <th>Similaritas </th>
                   </tr>
                 </thead>

@@ -20,7 +20,7 @@
               <input class="form-control" type="text" name="nama" id="nama" required readonly>
             </div>
             <div class="form-group">
-              <label class="control-label">Nonmor Kartu Identitas</label>
+              <label class="control-label">Nomor Kartu Identitas</label>
               <input class="form-control" type="number" name="nomor_kartu_identitas" id="nomor_kartu_identitas" required readonly>
             </div>
             <div class="form-group">
@@ -118,7 +118,7 @@
               @endforeach
             </div>
           </div>
-          <h5>Kompleksitas</h5>
+          <h5>Rekam Medis</h5>
           <div class="tile-body">
             <div class="row g-2 m-3">
               @foreach ($kompleksitas as $item)

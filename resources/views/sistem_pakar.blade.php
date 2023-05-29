@@ -108,7 +108,7 @@
               @endforeach
             </div>
           </div>
-          <h5>Kompleksitas</h5>
+          <h5>Rekam Medis</h5>
           <div class="tile-body">
             <div class="row g-2 m-3">
               @foreach ($kompleksitas as $item)

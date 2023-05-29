@@ -216,7 +216,7 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Kompleksitas</th>
+                  <th>Rekam Medis</th>
                   <th>Bobot</th>
                   <th>Option</th>
                 </tr>
