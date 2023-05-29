@@ -4,7 +4,7 @@
 <main class="app-content">
   <div class="app-title">
     <div>
-      <h1><i class="fa fa-dashboard"></i> Dashboard</h1>
+      <h1></i> Dashboard</h1>
     </div>
   </div>
   <div class="row">
@@ -18,6 +18,8 @@
         </div>
       </a>
     </div>
+
+    
     <div class="col-md-6 col-lg-3">
       <a href="#" style="text-decoration: none;">
         <div class="widget-small danger coloured-icon"><i class="icon fa fa-commenting fa-3x"></i>
@@ -39,7 +41,17 @@
       </a>
     </div>
   </div>
- 
+  <div class="col-md-6 col-lg-3">
+      <a href="#" style="text-decoration: none;">
+        <div class="widget-small warning coloured-icon"><i class="icon fa fa-newspaper-o fa-3x"></i>
+          <div class="info">
+            <h4>DATA PASIEN</h4>
+            <p><b>{{ $cnt_pasien }}</b></p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div> 
 
   @if (auth()->user()->role == 'admin')
   <div class="row">
@@ -78,7 +90,7 @@
     </div>
     <div class="col-sm-12 col-md-12 col-lg-6">
       <div class="tile">
-        <h3 class="tile-title">Diagaram Jumlah User</h3>
+        <h3 class="tile-title">Diagram Jumlah User</h3>
         <div class="embed-responsive embed-responsive-16by9">
           <canvas class="embed-responsive-item" id="barChart" width="437" height="246" style="width: 437px; height: 246px;"></canvas>
         </div>
@@ -126,7 +138,7 @@
     </div>
     <div class="col-md-6">
       <div class="tile">
-        <h3 class="tile-title">Diagaram Jumlah Kasus</h3>
+        <h3 class="tile-title">Diagram Jumlah Kasus</h3>
         <div class="embed-responsive embed-responsive-16by9">
           <canvas class="embed-responsive-item" id="barChart" width="437" height="246" style="width: 437px; height: 246px;"></canvas>
         </div>

@@ -24,7 +24,7 @@
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->
-    <header class="app-header"><a class="app-header__logo" href="index.html">UPT PUSKESMAS SEKARGADUNG</a>
+    <header class="app-header"><a class="app-header__logo" img src="{{ asset('medicio/img/logo-kotapas.png') }}" href="index.html">UPT PUSKESMAS SEKARGADUNG</a>
   
       <!-- Sidebar toggle button-->
       <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>

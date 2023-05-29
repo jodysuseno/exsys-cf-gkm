@@ -56,7 +56,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <a href="index.html" class="logo me-auto" style="color: #009688"><img src="{{ asset('medicio/img/logo-kotapas.png') }}" alt="">  PUSKISMAS SEKARGADUNG</a>
+      <a href="index.html" class="logo me-auto" style="color: #009688"><img src="{{ asset('medicio/img/logo-kotapas.png') }}" alt=""> PUSKEMAS SEKARGADUNG</a>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
 
@@ -88,8 +88,8 @@
               <div class="col-sm-12 col-md-12 col-lg-6 text-white">
                 <br><br><br><br>
                 <br><br><br>
-                <h1 class="fs-1">SELAMAT DATANG</h1>
-                <p class="text-white">(PUSKESMAS SEKARGADUNG)</p>
+                <h1 class="fs-1">SELAMAT DATANG DI SISTEM DIAGNOSA KESEHATAN MENTAL</h1>
+                <h2 class="text-white">(PUSKESMAS SEKARGADUNG) </h2>
                 <br><br>
               </div>
               <div class="col-sm-12 col-md-12 col-lg-6">

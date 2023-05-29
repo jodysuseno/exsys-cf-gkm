@@ -29,7 +29,7 @@ class BobotKompleksitasController extends Controller
     public function create()
     {
         return view('kompleksitas.create', [
-            'title' => 'Data Kompleksitas'
+            'title' => 'Data Rekam Medis'
         ]);
     }
 
@@ -74,7 +74,7 @@ class BobotKompleksitasController extends Controller
     public function edit($id)
     {
         return view('kompleksitas.edit',[
-            'title' => 'Data Kompleksitas',
+            'title' => 'Data Rekam Medis',
             'get_kompleksitas' => BobotKompleksitas::findOrFail($id)
         ]);
     }
