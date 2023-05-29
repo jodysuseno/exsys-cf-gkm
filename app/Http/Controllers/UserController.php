@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kasus;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -60,8 +61,8 @@ class UserController extends Controller
             'email' => 'required|email|max:100|unique:users',
             'password' => 'required|min:6',
             'repassword' => 'required|min:6|same:password|max:100',
-            'nip' => 'required|numeric|max_digits:100',
-            'phone' => 'required|numeric|min_digits:12|max_digits:15',
+            // 'nip' => 'required|numeric|max_digits:100',
+            // 'phone' => 'required|numeric|min_digits:12|max_digits:15',
         ]);
 
         // dd($request);
@@ -122,8 +123,8 @@ class UserController extends Controller
         $request->validate([
             'nama' => 'required|max:100',
             'email' => 'required|email|max:100',
-            'nip' => 'required|numeric|max_digits:100',
-            'phone' => 'required|numeric|min_digits:12|max_digits:15',
+            // 'nip' => 'required|numeric|max_digits:100',
+            // 'phone' => 'required|numeric|min_digits:12|max_digits:15',
         ]);
         
         if($request->password == ''){
@@ -160,6 +161,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $get_kasus = Kasus::where('user_id', $id)->get();
+        $get_kasus->delete();
 
         $getrole = User::findOrFail($id);
         User::destroy($id);

@@ -1,12 +1,12 @@
 <!-- Sidebar menu-->
 <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
 <aside class="app-sidebar">
-  <!-- <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/48.jpg" alt="User Image">
+  <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="{{ asset('medicio/img/logo-kotapas.png') }}" style="width:100%; padding-left:50px; padding-right:50px;" alt="User Image">
     <div>
       <p class="app-sidebar__user-name">John Doe</p>
       <p class="app-sidebar__user-designation">Frontend Developer</p>
     </div>
-  </div> -->
+  </div>
   <ul class="app-menu">
     <li><a class="app-menu__item" href="{{ route('dashboard') }}"><i class="app-menu__icon fa fa-dashboard"></i><span class="app-menu__label">Dashboard</span></a></li>
     @if (auth()->user()->role == 'admin')
@@ -41,7 +41,7 @@
     </li>
     @elseif(auth()->user()->role == 'perawat')
     <li><a class="app-menu__item" href="{{ route('pasien.index') }}"><i class="app-menu__icon fa fa-wheelchair"></i><span class="app-menu__label">Data Pasien</span></a></li>
-    <li><a class="app-menu__item" href="{{ route('data_revise') }}"><i class="app-menu__icon fa fa-lightbulb-o"></i><span class="app-menu__label">Kasus revise</span></a></li>
+    {{-- <li><a class="app-menu__item" href="{{ route('data_revise') }}"><i class="app-menu__icon fa fa-lightbulb-o"></i><span class="app-menu__label">Kasus revise</span></a></li> --}}
     {{-- <li><a class="app-menu__item" href="{{ route('kasus.index') }}"><i class="app-menu__icon fa fa-book"></i><span class="app-menu__label">Kasus</span></a></li> --}}
     <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-lightbulb-o"></i><span class="app-menu__label">Basis Pengetahuan</span><i class="treeview-indicator fa fa-angle-right"></i></a>
       <ul class="treeview-menu">

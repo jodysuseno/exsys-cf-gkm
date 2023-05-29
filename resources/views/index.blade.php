@@ -5,12 +5,13 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Medicio Bootstrap Template - Index</title>
+  <title>SISTEM DIAGNOSA KESEHATAN MENTAL - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{{ asset('medicio/img/favicon.png') }}" rel="icon">
+  <!-- add icon link -->
+  <link rel = "icon" href = "{{ asset('medicio/img/logo-kotapas.png') }}" type = "image/x-icon">
   <link href="{{ asset('medicio/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->

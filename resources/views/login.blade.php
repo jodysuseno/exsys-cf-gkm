@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('valiadmin/assets/css/main.css') }}">
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Login - Exsys</title>
+    <title>SISTEM DIAGNOSA KESEHATAN MENTAL - Login</title>
   </head>
   <body>
     <section class="material-half-bg">
@@ -19,7 +19,7 @@
         <h1>Vali</h1>
       </div> -->
       <div class="login-box h-5">
-        <form class="login-form" action="{{ route('proses_login') }}" method="POST">
+        <form class="login-form" action="{{ route('proses_login') }}" method="POST" class="height:400px !important;">
           @csrf
           @if (session('status'))   
           <div class="alert alert-dismissible alert-danger">
@@ -35,10 +35,6 @@
           <div class="form-group">
             <label class="control-label">PASSWORD</label>
             <input class="form-control" name="password" type="password" placeholder="Password">
-          </div>
-          <div class="form-group">
-            <div class="utility">
-            </div>
           </div>
           <div class="form-group btn-container">
             <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>

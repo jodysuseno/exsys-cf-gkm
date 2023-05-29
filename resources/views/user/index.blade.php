@@ -45,11 +45,11 @@
                       </div>
                       <div class="form-group">
                         <label class="control-label">NIP</label>
-                        <input class="form-control" type="number" name="nip" value="{{ old('nip') }}" required>
+                        <input class="form-control" type="number" name="nip" value="{{ old('nip') }}">
                       </div>
                       <div class="form-group">
                         <label class="control-label">Telp</label>
-                        <input class="form-control" type="number" name="phone" value="{{ old('phone') }}" required>
+                        <input class="form-control" type="number" name="phone" value="{{ old('phone') }}">
                       </div>
                   </div>
                   <div class="modal-footer">
@@ -133,11 +133,11 @@
                               </div>
                               <div class="form-group">
                                 <label class="control-label">NIP</label>
-                                <input class="form-control" type="number" name="nip" required value="{{ $item->nip }}">
+                                <input class="form-control" type="number" name="nip" value="{{ $item->nip }}">
                               </div>
                               <div class="form-group">
                                 <label class="control-label">Telp</label>
-                                <input class="form-control" type="number" name="phone" required value="{{ $item->phone }}">
+                                <input class="form-control" type="number" name="phone" value="{{ $item->phone }}">
                               </div>
                             </div>
                             <div class="modal-footer">

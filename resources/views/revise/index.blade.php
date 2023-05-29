@@ -22,9 +22,9 @@
                   <th>Gejala Yang dialami</th>
                   <th>Catatan</th>
                   <th>Similarity</th>
-                  @if (auth()->user()->role == 'pakar')
+                  {{-- @if (auth()->user()->role == 'pakar') --}}
                   <th>Option</th>
-                  @endif
+                  {{-- @endif --}}
                   <th>Ketarangan</th>
                 </tr>
               </thead>
@@ -55,13 +55,13 @@
                     @endif
                   </td>
                   <td>{{ $item->similarity }}</td>
-                  @if (auth()->user()->role == 'pakar')
+                  {{-- @if (auth()->user()->role == 'pakar') --}}
                   <td>
                     <a href="{{ route('detail_revise', $item->id) }}" class="btn btn-sm btn-secondary" ><i class="fa fa-eye"></i> Detail</a>
                   </td>
-                  @endif
+                  {{-- @endif --}}
                   <td>
-                    @if (auth()->user()->role == 'pakar')
+                    {{-- @if (auth()->user()->role == 'pakar') --}}
                       @if ($item->keterangan == 'tunggu')
                       <div class="dropdown open">
                         <button class="btn btn-sm @if($item->keterangan == 'tunggu') btn-warning @else btn-success @endif dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -85,13 +85,13 @@
                       @else 
                         <span class="badge bg-success text-light">Selesai</span>
                       @endif
-                    @elseif (auth()->user()->role == 'perawat')
+                    {{-- @elseif (auth()->user()->role == 'perawat')
                       @if ($item->keterangan == 'tunggu')
                         <span class="badge bg-warning">Tunggu</span>
                       @else
                         <span class="badge bg-success text-light">Selesai</span>
                       @endif
-                    @endif
+                    @endif --}}
                   </td>
                 </tr>
                 @empty

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('nama');
-            $table->string('nip')->unique();
-            $table->string('phone');
+            $table->string('nip')->unique()->nullable();
+            $table->string('phone')->unique()->nullable();
             $table->enum('role',['admin','pakar','perawat']);
             $table->rememberToken();
             $table->timestamps();

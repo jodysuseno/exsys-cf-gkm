@@ -18,8 +18,6 @@
         </div>
       </a>
     </div>
-
-    
     <div class="col-md-6 col-lg-3">
       <a href="#" style="text-decoration: none;">
         <div class="widget-small danger coloured-icon"><i class="icon fa fa-commenting fa-3x"></i>
@@ -41,7 +39,8 @@
       </a>
     </div>
   </div>
-  <div class="col-md-6 col-lg-3">
+  <div class="row">
+    <div class="col-md-6 col-lg-3">
       <a href="#" style="text-decoration: none;">
         <div class="widget-small warning coloured-icon"><i class="icon fa fa-newspaper-o fa-3x"></i>
           <div class="info">
