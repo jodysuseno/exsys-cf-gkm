@@ -22,7 +22,8 @@
     <!-- Font-icon css-->
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- add icon link -->
-        <link rel = "icon" href = "{{ asset('medicio/img/logo-kotapas.png') }}" type = "image/x-icon">
+    <link rel = "icon" href = "{{ asset('medicio/img/logo-kotapas.png') }}" type = "image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
   <body class="app sidebar-mini">
     <!-- Navbar-->

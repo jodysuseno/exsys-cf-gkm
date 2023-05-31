@@ -10,6 +10,15 @@
   <div class="row">
     <div class="col-md-12">
       <div class="tile">
+        @if ($errors->any()) 
+        <div class="alert alert-dismissible alert-danger">
+          <button class="close" type="button" data-dismiss="alert">×</button>
+          <h6>{{ $title }} Kesalahan!</h6>
+          @foreach ($errors->all() as $error)
+            <strong>{{ $error }}</strong> <br>
+          @endforeach
+        </div>
+        @endif
         <form action="{{ route('hasil_pakar') }}" method="POST">
           @csrf
           <h3 class="tile-title">Sistem Pakar</h3>

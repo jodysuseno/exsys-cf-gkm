@@ -104,14 +104,9 @@
                             <h5 class="modal-title" id="modalTitleId">Edit Bobot</h5>
                             <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                           </div>
-                          <div class="modal-body">
                             <form action="{{ route('basis_pengetahuan.update', $item->id) }}" method="POST">
                               @csrf
                               @method('put')
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="modalTitleId">Tambah Gejala</h5>
-                                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                              </div>
                               <div class="modal-body">
                                 <div class="tile-body">
                                   <div class="form-group">

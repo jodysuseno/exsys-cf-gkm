@@ -39,6 +39,7 @@ class KasusController extends Controller
         return view('basis_pengetahuan.create', [
             'pasien' => Pasien::orderByDesc('created_at')->get(),
             'gejala' => Gejala::all(),
+            'bobot_gejala' => BobotGejala::all(),
             'kompleksitas' => BobotKompleksitas::all(),
             'get_penyakit' => Penyakit::all(),
             'title' => 'Buat Aturan Pakar'
@@ -54,7 +55,9 @@ class KasusController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'pasien_id' => 'required'
+            'pasien_id' => 'required',
+            'gejala_id' => 'required|array',
+            'gejala_id.*' => 'required',
         ]);
 
         Kasus::create([
@@ -69,19 +72,25 @@ class KasusController extends Controller
         $get_new_kasus_id = Kasus::orderByDesc('id')->first()->id;
 
         // add new gejala 
-        foreach ($request->gejala_id as $val_id_gejala) {
-            BasisPengetahuan::create([
-                'kasus_id' => $get_new_kasus_id,
-                'gejala_id' => $val_id_gejala,
-                'bobot_gejala_id' => BobotGejala::orderBy('bobot','asc')->first()->id,
-            ]);
+        foreach ($request->gejala_id as $keyg => $valueg) {
+            foreach ($request->bobot_gejala_id as $keyb => $valueb) {
+                if($keyg == $keyb ){
+                    BasisPengetahuan::create([
+                        'kasus_id' => $get_new_kasus_id,
+                        'gejala_id' => $valueg,
+                        'bobot_gejala_id' => $valueb,
+                    ]);
+                }
+            }
         }
         // add kompleksitas
-        foreach ($request->kompleksitas_id as $req_komplek_val_item) {
-            BasisPengetahuanKompleksitas::create([
-                'kasus_id' => $get_new_kasus_id,
-                'kompleksitas_id' => $req_komplek_val_item,
-            ]);
+        if (!empty($request->kompleksitas_id)) {
+            foreach ($request->kompleksitas_id as $req_komplek_val_item) {
+                BasisPengetahuanKompleksitas::create([
+                    'kasus_id' => $get_new_kasus_id,
+                    'kompleksitas_id' => $req_komplek_val_item,
+                ]);
+            }
         }
 
         return redirect()->route('kasus.index')->with('status', 'Berhasil ditambahkan!');

@@ -74,7 +74,8 @@ class AppController extends Controller
 
         $request->validate([
             'pasien_id' => 'required',
-            // 'gejala_id' => 'required|array|min:1'
+            'gejala_id' => 'required|array',
+            'gejala_id.*' => 'required',
         ]);
 
         // get data kasus
