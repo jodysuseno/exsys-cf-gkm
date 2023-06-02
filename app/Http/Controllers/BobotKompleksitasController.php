@@ -16,7 +16,7 @@ class BobotKompleksitasController extends Controller
     public function index()
     {
         return view('kompleksitas.index', [
-            'title' => 'Data Bobot Gejala',
+            'title' => 'Data Rekam Medis',
             'kompleksitas' => BobotKompleksitas::orderByDesc('id')->get(),
         ]);
     }

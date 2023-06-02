@@ -67,7 +67,7 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
                   </div>
                 </form>
               </div>
@@ -123,7 +123,7 @@
                                 </div>
                               </div>
                               <div class="modal-footer">
-                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
                               </div>
                             </form>
                           </div>
@@ -167,7 +167,7 @@
           </div>
 
           <hr>
-          <h4 class="mb-3">Basis Pengetahuan Kompleksitas</h4>
+          <h4 class="mb-3">Basis Pengetahuan Rekam Medis</h4>
 
           @if (count($slc_kompleksitas) > 0)
           <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambahKId"><i class="fa fa-plus"></i> Tambah</button>
@@ -199,7 +199,7 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Simpan</button>
                   </div>
                 </form>
               </div>

@@ -21,7 +21,7 @@
         @endif
         <form action="{{ route('kasus.store') }}" method="POST">
           @csrf
-          <h3 class="tile-title">Sistem Pakar</h3>
+          <h3 class="tile-title">Sistem Diagnosa</h3>
           <div class="tile-body col-sm-12 col-md-6 col-gl-6">
             <div class="form-group">
               <label class="control-label">Nama</label>

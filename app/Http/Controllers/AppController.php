@@ -65,7 +65,7 @@ class AppController extends Controller
             'pasien' => Pasien::orderByDesc('created_at')->get(),
             'gejala' => Gejala::all(),
             'kompleksitas' => BobotKompleksitas::all(),
-            'title' => 'Sistem Pakar'
+            'title' => 'Sistem Diagnosa'
         ]);
     }
 

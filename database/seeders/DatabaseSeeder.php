@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
             'phone' => '085000888591',
             'role' => 'perawat',
         ]);
+        
         //buat data bobot kompleksitas
         BobotKompleksitas::create(['nama' => 'Riwayat Penyakit Kronis', 'bobot' => 3]);
         BobotKompleksitas::create(['nama' => 'Riwayat Keluarga Gangguan Kejiwaan', 'bobot' => 5]);

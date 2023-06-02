@@ -37,7 +37,7 @@
               </div>
           </div>
           <div class="tile-footer">
-            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-save"></i>Save</button> 
+            <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-save"></i>Simpan</button> 
           </div>
         </form>
       </div>

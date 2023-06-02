@@ -45,7 +45,9 @@
   <div id="topbar" class="d-flex align-items-center fixed-top" style="background-color: #009688">
     <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
       <div class="align-items-center d-none d-md-flex">
-        <i class="bi bi-clock"></i> Monday - Saturday, 8AM to 10PM
+      <marquee width="500" height="40">Visi : Terwujudnya Puskemas Sebagai Pusat Pelayanan Kesehatan Dasar Yang Prima
+    Untuk Peningkatan Kualitas Kehidupan Seluruh Masyarakat Moto : Siap Melayani Dengan Hati </marquee>
+  </marquee>
       </div>
       <div class="d-flex align-items-center">
         <i class="bi bi-phone"></i> Call us now +1 5589 55488 55
