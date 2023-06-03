@@ -45,12 +45,13 @@
   <div id="topbar" class="d-flex align-items-center fixed-top" style="background-color: #009688">
     <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
       <div class="align-items-center d-none d-md-flex">
+      <class="d-flex align-items-center">
       <marquee width="500" height="40">Visi : Terwujudnya Puskemas Sebagai Pusat Pelayanan Kesehatan Dasar Yang Prima
     Untuk Peningkatan Kualitas Kehidupan Seluruh Masyarakat Moto : Siap Melayani Dengan Hati </marquee>
   </marquee>
       </div>
       <div class="d-flex align-items-center">
-        <i class="bi bi-phone"></i> Call us now +1 5589 55488 55
+        <i class="bi bi-phone"></i> (0343) 5643610
       </div>
     </div>
   </div>
@@ -220,14 +221,14 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Medicio</span></strong>. All Rights Reserved
+        &copy; Copyright By <strong><span>Puskemas Sekargadung</span></strong>
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/medicio-free-bootstrap-theme/ -->
-        Designed by <a  style="color: #009688" href="https://bootstrapmade.com/">BootstrapMade</a>
+        Designed by <a  style="color: #009688" >Novelya Asis Sholikha</a>
       </div>
     </div>
   </footer><!-- End Footer -->

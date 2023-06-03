@@ -15277,7 +15277,7 @@ be a descendant of the grid when it is being dragged.
 
 .treeview.is-expanded [data-toggle='treeview'] {
   border-left-color: var(--primary);
-  background: #0d1214;
+  background: #009688;
 }
 
 .treeview.is-expanded .treeview-menu {

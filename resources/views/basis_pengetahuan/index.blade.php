@@ -30,7 +30,7 @@
                   <th>Penyakit</th>
                   <th>Similarity</th>
                   <th>Status</th>
-                  <th>User Service</th>
+                  <th>Pemeriksa</th>
                   <th>Option</th>
                 </tr>
               </thead>
