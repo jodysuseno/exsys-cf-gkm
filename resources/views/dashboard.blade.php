@@ -38,8 +38,6 @@
         </div>
       </a>
     </div>
-  </div>
-  <div class="row">
     <div class="col-md-6 col-lg-3">
       <a href="#" style="text-decoration: none;">
         <div class="widget-small warning coloured-icon"><i class="icon fa fa-newspaper-o fa-3x"></i>
@@ -50,7 +48,7 @@
         </div>
       </a>
     </div>
-  </div> 
+  </div>
 
   @if (auth()->user()->role == 'admin')
   <div class="row">

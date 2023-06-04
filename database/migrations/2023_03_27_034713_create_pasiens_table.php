@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('pasiens', function (Blueprint $table) {
             $table->id();
-            $table->string('nomor_kartu_identitas')->unique();
+            $table->string('nomor_kartu_identitas')->nullable()->unique();
             $table->string('nama');
-            $table->integer('umur');
-            $table->string('phone');
+            $table->integer('umur')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
         });
     }

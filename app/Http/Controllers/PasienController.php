@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kasus;
 use Illuminate\Http\Request;
 use App\Models\Pasien;
 
@@ -41,10 +42,10 @@ class PasienController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nomor_kartu_identitas' => 'required|numeric|unique:pasiens',
+            'nomor_kartu_identitas' => 'nullable|numeric|unique:pasiens',
             'nama' => 'required',
-            'umur' => 'required|numeric',
-            'phone' => 'required|numeric|digits_between:12,15',
+            'umur' => 'nullable|numeric',
+            'phone' => 'nullable|numeric|digits_between:12,15',
         ]);
 
         Pasien::create([
@@ -92,10 +93,10 @@ class PasienController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nomor_kartu_identitas' => 'required|numeric',
+            'nomor_kartu_identitas' => 'nullable|numeric|unique:pasiens,nomor_kartu_identitas,'.$id,
             'nama' => 'required',
-            'umur' => 'required|numeric',
-            'phone' => 'required|numeric|digits_between:12,15',
+            'umur' => 'nullable|numeric',
+            'phone' => 'nullable|numeric|digits_between:12,15',
         ]);
 
         Pasien::where('id', $id)->update([
@@ -116,6 +117,7 @@ class PasienController extends Controller
      */
     public function destroy($id)
     {
+        Kasus::where('pasien_id', $id)->delete();
         Pasien::destroy($id);
         return redirect()->route('pasien.index')->with('status','Data berhasil dihapus');
     }

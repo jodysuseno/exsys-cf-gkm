@@ -17,7 +17,7 @@
           <div class="tile-body">
               <div class="form-group">
                 <label class="control-label">Nomor kartu Identitas</label>
-                <input class="form-control @error('nomor_kartu_identitas') is-invalid @enderror" type="number" name="nomor_kartu_identitas" required value="{{ old('nomor_kartu_identitas', $get_pasien->nomor_kartu_identitas) }}">
+                <input class="form-control @error('nomor_kartu_identitas') is-invalid @enderror" type="number" name="nomor_kartu_identitas" value="{{ old('nomor_kartu_identitas', $get_pasien->nomor_kartu_identitas) }}">
                 @error('nomor_kartu_identitas') <div class="form-control-feedback text-danger ">{{ $message }}</div> @enderror
               </div>
               <div class="form-group">
@@ -27,12 +27,12 @@
               </div>
               <div class="form-group">
                 <label class="control-label">Umur</label>
-                <input class="form-control @error('umur') is-invalid @enderror" type="number" name="umur" required value="{{ old('umur', $get_pasien->umur) }}">
+                <input class="form-control @error('umur') is-invalid @enderror" type="number" name="umur" value="{{ old('umur', $get_pasien->umur) }}">
                 @error('umur') <div class="form-control-feedback text-danger">{{ $message }}</div> @enderror
               </div>
               <div class="form-group">
                 <label class="control-label">Telp</label>
-                <input class="form-control @error('phone') is-invalid @enderror" type="number" name="phone" required value="{{ old('phone', $get_pasien->phone) }}">
+                <input class="form-control @error('phone') is-invalid @enderror" type="number" name="phone" value="{{ old('phone', $get_pasien->phone) }}">
                 @error('phone') <div class="form-control-feedback text-danger">{{ $message }}</div> @enderror
               </div>
           </div>
