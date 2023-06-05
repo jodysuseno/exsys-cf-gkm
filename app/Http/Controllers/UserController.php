@@ -24,7 +24,7 @@ class UserController extends Controller
     public function pakar_index()
     {
         return view('user.index', [
-            'title' => 'Data Pakar',
+            'title' => 'Data Dokter',
             'role' => 'pakar',
             'user' => User::where('role', 'pakar')->orderByDesc('created_at')->get(),
         ]);
@@ -162,7 +162,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $get_kasus = Kasus::where('user_id', $id)->get();
-        $get_kasus->delete();
+        $get_kasus->each->delete();
 
         $getrole = User::findOrFail($id);
         User::destroy($id);
