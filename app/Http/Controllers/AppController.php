@@ -19,6 +19,7 @@ class AppController extends Controller
 {
     public function index()
     {
+        // membuka view index.blade.php
         return view('index', [
             'title' => 'Selamat Datang'
         ]);
@@ -27,60 +28,64 @@ class AppController extends Controller
     public function dashboard()
     {
         return view('dashboard', [
-            'title' => 'dashboard',
-            'user' => User::orderByDesc('created_at')->get(),
-            'kasus' => Kasus::orderByDesc('created_at')->get(),
-            'penyakit' => Penyakit::orderByDesc('created_at')->get(),
-            'cnt_user_admin' => User::where('role', 'admin')->count(),
-            'cnt_user_pakar' => User::where('role', 'pakar')->count(),
-            'cnt_user_perawat' => User::where('role', 'perawat')->count(),
-            'cnt_penyakit' => Penyakit::orderByDesc('role', 'penyakit')->count(),
-            'cnt_pasien' => Pasien::count(),
+            'title' => 'dashboard', // judul
+            'user' => User::orderByDesc('created_at')->get(), // menampilkan data user
+            'kasus' => Kasus::orderByDesc('created_at')->get(), // menampilkan data kasus
+            'penyakit' => Penyakit::orderByDesc('created_at')->get(), // menampilkan data penyakit
+            'cnt_user_admin' => User::where('role', 'admin')->count(), // mengambil jumlah data user admin
+            'cnt_user_pakar' => User::where('role', 'pakar')->count(), // mengambil jumlah data user pakar
+            'cnt_user_perawat' => User::where('role', 'perawat')->count(), // mengambil jumlah data user perawat
+            'cnt_penyakit' => Penyakit::orderByDesc('role', 'penyakit')->count(), // mengambil jumlah data penyakit
+            'cnt_pasien' => Pasien::count(), //  // mengambil jumlah data pasien
         ]);
     }
     public function login()
     {
-        return view('login');
+        return view('login'); // menampilkan form login di login.blade.php
     }
     public function proses_login(Request $request)
     {
+        // validasi input email dan password
         $credentials = $request->validate([
             'email' => 'required',
             'password' => 'required|min:6|'
         ]);
+        // proses login jika berhasil
         if (Auth::attempt($credentials)) {
             return redirect('/dashboard');
         }
+        // jika gagal maka diarahkan ke form login
         return redirect('/login')->with('status', 'Login Gagal!');
     }
     public function logout()
     {
+        // proses logout
         Auth::logout();
         return redirect('/login');
     }
 
     public function sistem_pakar()
     {
-        return view('sistem_pakar', [
-            'pasien' => Pasien::orderByDesc('created_at')->get(),
-            'gejala' => Gejala::all(),
-            'kompleksitas' => BobotKompleksitas::all(),
-            'title' => 'Sistem Diagnosa'
+        return view('sistem_pakar', [ // mengarahkan ke view sistem_pakar.blade.php
+            'pasien' => Pasien::orderByDesc('created_at')->get(), //  menampilkan data pasien 
+            'gejala' => Gejala::all(), // untuk menampilkan pilihan gejala
+            'kompleksitas' => BobotKompleksitas::all(), // untuk menampilkan pilihan kompleksitas
+            'title' => 'Sistem Diagnosa' // judul
         ]);
     }
 
     public function hasil_pakar(Request $request)
     {
 
-        $request->validate([
+        $request->validate([ // validasi input dari form sistem pakar
             'pasien_id' => 'required',
             'gejala_id' => 'required|array',
             'gejala_id.*' => 'required',
         ]);
 
-        // get data kasus
+        // mengambil data kasus yang berstatus selesai untuk dilakuakn perhitungan certainty factor
         $kasus = Kasus::where('keterangan', 'selesai')->get();
-        //set array variabel
+        // buat variabel array kosong
         // $kasus_id = array();
         $data_penyakit_id = array();
         $data_penyakit_name = array();
@@ -92,88 +97,88 @@ class AppController extends Controller
         $data_same_kompleksitas = array();
         $data_kasus_gejala = array();
         $data_kasus_kompleksitas = array();
-        // loop data kasus
+        // looping data kasus
         foreach ($kasus as $item) {
-            // req gejala
+            // mengambil id gejala data input data gejala yang dipilih  
             $req_gejala_id = array();
             foreach ($request->gejala_id as $req_gejala_item) {
-                $req_gejala_id[] = $req_gejala_item;
+                $req_gejala_id[] = $req_gejala_item; // memasukan gejala yang diambil ke array $req_gejala_id
             }
-            // data gejala
+            // mengambil id gejala dari basis pengetahuan berdasarkan id kasus  
             $data_gejala_id = array();
             foreach (BasisPengetahuan::where('kasus_id', $item->id)->get() as $data_gejala_item) {
-                $data_gejala_id[] = $data_gejala_item->gejala_id;
+                $data_gejala_id[] = $data_gejala_item->gejala_id; // memasukan id gejala pada array $data_gejala_id[]  
             }
-            // get same id form request and kasus
+            // megnmbil id gejala yang sama antara array $req_gejala_id dan $data_gejala_id
             $same_gejala = array_intersect($req_gejala_id, $data_gejala_id);
 
-            //get req bobot gejala value
+            // mengambil nilai gejala data input data gejala yang dipilih  
             $req_gejala_val = array();
             foreach ($same_gejala as $req_gejala_val_item) {
-                $req_gejala_val[] = BasisPengetahuan::where('kasus_id', $item->id)->where('gejala_id', $req_gejala_val_item)->first()->bobot_gejala->bobot;
+                $req_gejala_val[] = BasisPengetahuan::where('kasus_id', $item->id)->where('gejala_id', $req_gejala_val_item)->first()->bobot_gejala->bobot; // memasukan nilai bobot gejala yang diambil ke array $req_gejala_val
             }
-            //get data bobot gejala value
+            //mengambil nilai gejala dari basis pengetahuan berdasarkan nilai kasus
             $data_gejala_val = array();
             foreach ($data_gejala_id as $data_gejala_val_item) {
-                $data_gejala_val[] = BasisPengetahuan::where('kasus_id', $item->id)->where('gejala_id', $data_gejala_val_item)->first()->bobot_gejala->bobot;
+                $data_gejala_val[] = BasisPengetahuan::where('kasus_id', $item->id)->where('gejala_id', $data_gejala_val_item)->first()->bobot_gejala->bobot; // memasukan nilai bobot gejala yang pada array $data_gejala_val 
             }
-            // count similarity
-            // merge data from gejala and kompleksitas
+            // proses menghitung similarity
 
-            if (is_null($request->kompleksitas_id)) {
-                $mergeSW = $req_gejala_val;
-                $mergeW = $data_gejala_val;
-                $same_komplek = null;
-                $data_komplek_id = null;
-            } else {
-                // req komplek
+            if (is_null($request->kompleksitas_id)) { //jika kompleksitas tidak ada yang dipilih
+                $mergeSW = $req_gejala_val; // variabel $mergeSW sama dengan $req_gejala_val 
+                $mergeW = $data_gejala_val; // $mergeW sama dengan $data_gejala_val
+                $same_komplek = null; // variabel $same_komplek diset null/kosong 
+                $data_komplek_id = null; // variabel $data_komplek_id diset null/kosong
+            } else { //jika kompleksitas ada yang dipilih
+                // mengambil id kopleksitas data input data kopleksitas yang dipilih
                 $req_komplek_id = array();
                 foreach ($request->kompleksitas_id as $req_komplek_item) {
-                    $req_komplek_id[] = $req_komplek_item;
+                    $req_komplek_id[] = $req_komplek_item; // memasukan kompleksitas yang diambil ke array $req_kompleksitas_id
                 }
-                // data komplek
+                // mengambil id kompleksitas dari basis pengetahuan kompleksitas berdasarkan id kasus  
                 $data_komplek_id = array();
                 foreach (BasisPengetahuanKompleksitas::where('kasus_id', $item->id)->get() as $data_komplek_item) {
-                    $data_komplek_id[] = $data_komplek_item->kompleksitas_id;
+                    $data_komplek_id[] = $data_komplek_item->kompleksitas_id; // memasukan id kompleksitas pada array $data_kompleksitas_id[]  
                 }
 
-                // get same id form request and kasus
+                // mendapatkan id kompleksitas yang diarray sama antara array $req_komplek_id dan $data_komplek_id
                 $same_komplek = array_intersect($req_komplek_id, $data_komplek_id);
 
-                //get req bobot kompleksitas value
+                // mengambil nilai bobot kompleksitas dari $same_komplek
                 $req_komplek_val = array();
                 foreach ($same_komplek as $req_komplek_val_item) {
                     $req_komplek_val[] = BasisPengetahuanKompleksitas::where('kasus_id', $item->id)->where('kompleksitas_id', $req_komplek_val_item)->first()->kompleksitas->bobot;
                 }
-                //get data bobot kompleksitas value
+                //mengambil nilai bobot kompleksitas dari $data_komplek_id
                 $data_komplek_val = array();
                 foreach ($data_komplek_id as $data_komplek_val_item) {
                     $data_komplek_val[] = BasisPengetahuanKompleksitas::where('kasus_id', $item->id)->where('kompleksitas_id', $data_komplek_val_item)->first()->kompleksitas->bobot;
                 }
+
+                // menggabungkan id gejala dan id kompleksitas yang didapatkan
                 $mergeSW = array_merge($req_gejala_val, $req_komplek_val);
                 $mergeW = array_merge($data_gejala_val, $data_komplek_val);
             }
 
-            // $mergeSW = array_merge($req_gejala_val, $req_komplek_val);
+            // Rumus Similarity = Σ $mergeSW / Σ $mergeW
 
-            $totSW = 0;
-            // count SW
+            $totSW = 0; // definisikan variabel untuk Σ $mergeSW
+            // sum($mergeSWs)
             foreach ($mergeSW as $mergeSWs) {
                 $totSW = $totSW + $mergeSWs;
             }
-            // $mergeW = array_merge($data_gejala_val, $data_komplek_val);
-            $totW = 0;
-            // count W
+
+            $totW = 0; // definisikan variabel untuk Σ $mergeW
+            // sum($mergeW)
             foreach ($mergeW as $mergeWs) {
                 $totW = $totW + $mergeWs;
             }
-            // devide SW and W
 
-            $result = $totSW / $totW;
-            // dd($result);
+            // bagi $totSW dengan $totW untuk mendapatkan hasil similarity
+            $result = $totSW / $totW; //hasil similarity
 
             // set value in variable
-            $data_kasus_id = $item->id;
+            $data_kasus_id = $item->id; 
             $data_penyakit_id = $item->penyakit->id;
             $data_penyakit_name = $item->penyakit->nama;
             $data_penyakit_devinisi = $item->penyakit->definisi;
@@ -185,7 +190,7 @@ class AppController extends Controller
             $data_kasus_gejala = $data_gejala_id;
             $data_kasus_kompleksitas = $data_komplek_id;
 
-            // include variable to array
+            // masukan semua nilai dari fariabel diatas ke array $result_data
             $result_data[] = [
                 'data_kasus_id' => $data_kasus_id,
                 'data_penyakit_id' => $data_penyakit_id,
@@ -211,8 +216,8 @@ class AppController extends Controller
         $data_same_kompleksitas;
         $data_kasus_gejala;
         $data_kasus_kompleksitas;
-
-        // sort descending of higher similarity
+        
+        // mendapatkan nilai similiarity tertinggi
         $data_result = 0;
         foreach ($result_data as $record) {
             if ($record['data_result'] > $data_result) {
@@ -231,16 +236,9 @@ class AppController extends Controller
         }
         $result_data;
 
-
+        // sort descending of higher similarity
         $columns = array_column($result_data, 'data_result');
         array_multisort($columns, SORT_DESC, $result_data);
-
-        // dd([
-        //     $result_data[0]["data_result"],
-        //     $data_result,
-        //     $result_data[0]['data_penyakit_id'],
-        //     $data_penyakit_id
-        // ]);
 
         // create new kasus
         Kasus::create([
@@ -312,7 +310,7 @@ class AppController extends Controller
         ]);
     }
 
-    public function cek_sebagai_revise($id_kasus)
+    public function cek_sebagai_revise($id_kasus) // proses mengubah hasil pakar reuse menjadi revise. Proses untuk tombol "cek as revise" yang ada di hasil pakar
     {
         Kasus::where('id', $id_kasus)->update([
             'status' => 'revise',

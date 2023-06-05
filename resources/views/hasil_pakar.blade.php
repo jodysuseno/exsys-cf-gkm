@@ -86,8 +86,10 @@
               <address>
                 <strong>Gejala yang dipilih</strong><br>
                 <ul>
+                  {{-- looping variabel array $gejala --}}
                   @foreach ($gejala as $item)
-                  <li>{{ $data_gejala->where('id', $item)->first()->nama }}</li>
+                    {{-- menampilkan nama gejala dari $data_gejala berdasarkan id = $item --}}
+                    <li>{{ $data_gejala->where('id', $item)->first()->nama }}</li>
                   @endforeach
                 </ul>
               </address>
@@ -96,12 +98,15 @@
               <address>
                 <strong>Rekam Medis yang dipilih</strong><br>
                 <ul>
+                  {{-- kondisi array $kompleksitas jika kosong --}}
                   @if (is_null($kompleksitas))
-                  <strong><li>Tidak ada yang dipilih</li></strong>
+                    <strong><li>Tidak ada yang dipilih</li></strong>
                   @else
-                  @foreach ($kompleksitas as $item)
-                  <li>{{ $data_kompleksitas->where('id', $item)->first()->nama }}</li>
-                  @endforeach
+                    {{-- looping $kompleksitas --}}
+                    @foreach ($kompleksitas as $item)
+                      {{-- menampilkan nama dari $data_kompleksitas berdaraskan id = $item --}}
+                      <li>{{ $data_kompleksitas->where('id', $item)->first()->nama }}</li>
+                    @endforeach
                   @endif
                 </ul>
               </address>
@@ -131,39 +136,52 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($kasus as $key => $item)
-                  @if ($key < 5)
-                  <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item['data_pasien_name'] }}</td>
-                    <td>{{ $item['data_penyakit_name'] }}</td>
-                    <td>
-                      <ul>
-                        @foreach ($item['data_kasus_gejala'] as $itemg)
-                        <li>{{ $data_gejala->where('id', $itemg)->first()->nama }}</li>
-                        @endforeach
-                        @if (!is_null($item['data_kasus_kompleksitas']))
-                        @foreach ($item['data_kasus_kompleksitas'] as $itemk)
-                        <li>{{ $data_kompleksitas->where('id', $itemk)->first()->nama }}</li>
-                        @endforeach
-                        @endif
-                      </ul>
-                    </td>
-                    <td>
-                      <ul>
-                        @foreach ($item['data_same_gejala'] as $itemg)
-                        <li>{{ $data_gejala->where('id', $itemg)->first()->nama }}</li>
-                        @endforeach
-                        @if (!is_null($item['data_same_kompleksitas']))
-                        @foreach ($item['data_same_kompleksitas'] as $itemk)
-                        <li>{{ $data_kompleksitas->where('id', $itemk)->first()->nama }}</li>
-                        @endforeach
-                        @endif
-                      </ul>
-                    </td>
-                    <td>{{ number_format($item['data_result'], 2) }} </td>
-                  </tr>
-                  @endif
+                  {{-- looping array $kasus --}}
+                  @foreach ($kasus as $key => $item) 
+                    {{-- menampikan 5 data kasus --}}
+                    @if ($key < 5)
+                    <tr> 
+                      <td>{{ $loop->iteration }}</td>
+                      <td>{{ $item['data_pasien_name'] }}</td>
+                      <td>{{ $item['data_penyakit_name'] }}</td>
+                      <td>
+                        <ul>
+                          {{-- lopping $item['data_kasus_gejala'] --}}
+                          @foreach ($item['data_kasus_gejala'] as $itemg)
+                            {{-- menampikan nama dari $data_gejala yang id = $itemg --}}
+                            <li>{{ $data_gejala->where('id', $itemg)->first()->nama }}</li>
+                          @endforeach
+                          {{-- cek $item['data_kasus_kompleksitas'] jika tidak kosong --}}
+                          @if (!is_null($item['data_kasus_kompleksitas']))
+                            {{-- lopping $item['data_kasus_kompleksitas'] --}}
+                            @foreach ($item['data_kasus_kompleksitas'] as $itemk)
+                              {{-- menampikan nama dari $data_kompleksitas yang id = $itemk --}}
+                              <li>{{ $data_kompleksitas->where('id', $itemk)->first()->nama }}</li>
+                            @endforeach
+                          @endif
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          {{-- lopping $item['data_same_gejala'] --}}
+                          @foreach ($item['data_same_gejala'] as $itemg)
+                            {{-- menampikan nama dari $data_gejala yang id = $itemg --}}
+                            <li>{{ $data_gejala->where('id', $itemg)->first()->nama }}</li>
+                          @endforeach
+                          {{-- cek $item['data_same_kompleksitas'] jika tidak kosong --}}
+                          @if (!is_null($item['data_same_kompleksitas']))
+                            {{-- lopping $item['data_same_kompleksitas'] --}}
+                            @foreach ($item['data_same_kompleksitas'] as $itemk)
+                              {{-- menampikan nama dari $data_kompleksitas yang id = $itemk --}}
+                              <li>{{ $data_kompleksitas->where('id', $itemk)->first()->nama }}</li>
+                            @endforeach
+                          @endif
+                        </ul>
+                      </td>
+                      {{-- menampilkan hasil similarity tiap kasus --}}
+                      <td>{{ number_format($item['data_result'], 2) }} </td>
+                    </tr>
+                    @endif
                   @endforeach
                 </tbody>
               </table>
@@ -175,6 +193,7 @@
   </div>
 </main>
 <script>
+// fungsi javascript untuk print sebagian halaman hasil pakar
 function printContent(el){
   var restorepage = document.body.innerHTML;
   var printcontent = document.getElementById(el).innerHTML;
