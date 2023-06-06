@@ -47,7 +47,7 @@
                     {{-- tombol edit --}}
                     <a href="{{ route('kasus.show', $item->id) }}" class="btn btn-sm btn-secondary"><i class="fa fa-eye"></i> Detail</a>
                     {{-- tombol hapus --}}
-                    {{-- <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapusId{{ $item->id }}"><i class="fa fa-trash"></i> Hapus</button>
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#modalHapusId{{ $item->id }}"><i class="fa fa-trash"></i> Hapus</button>
                     <!-- Modal Body -->
                     <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
                     <div class="modal fade" id="modalHapusId{{ $item->id }}" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
@@ -58,7 +58,7 @@
                             <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                           </div>
                           <div class="modal-body">
-                            Apakah ada yakin untuk menghapus data "{{ $item->nama }}".
+                            Apakah ada yakin untuk menghapus data kasus dari pasien "{{ $item->pasien->nama }}".
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -70,7 +70,7 @@
                           </div>
                         </div>
                       </div>
-                    </div> --}}
+                    </div>
                   </td>
                 </tr>
                 @empty

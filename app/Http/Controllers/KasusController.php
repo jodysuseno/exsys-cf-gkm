@@ -74,7 +74,7 @@ class KasusController extends Controller
         // add new gejala 
         foreach ($request->gejala_id as $keyg => $valueg) {
             foreach ($request->bobot_gejala_id as $keyb => $valueb) {
-                if($keyg == $keyb ){
+                if ($keyg == $keyb) {
                     BasisPengetahuan::create([
                         'kasus_id' => $get_new_kasus_id,
                         'gejala_id' => $valueg,
@@ -112,7 +112,7 @@ class KasusController extends Controller
         foreach ($basis as $item) {
             $id_bas[] = $item->gejala_id;
         }
-        $result=array_diff($id_gej,$id_bas);
+        $result = array_diff($id_gej, $id_bas);
         return $result;
     }
     public function get_diff_selectk($basis, $pilihan)
@@ -125,7 +125,7 @@ class KasusController extends Controller
         foreach ($basis as $item) {
             $id_bas[] = $item->kompleksitas_id;
         }
-        $result=array_diff($id_gej,$id_bas);
+        $result = array_diff($id_gej, $id_bas);
         return $result;
     }
 
@@ -144,9 +144,9 @@ class KasusController extends Controller
 
 
 
-        return view('basis_pengetahuan.show',[
+        return view('basis_pengetahuan.show', [
             'title' => 'Detail Kasus Pengetahaun',
-            'kasus' => Kasus::where('id',$id)->first(),
+            'kasus' => Kasus::where('id', $id)->first(),
             'slc_gejala' => $slc_gejala,
             'gejala' => Gejala::all(),
             'bobot_gejala' => BobotGejala::all(),
@@ -159,7 +159,7 @@ class KasusController extends Controller
 
     public function data_revise()
     {
-        return view('revise.index',[
+        return view('revise.index', [
             'title' => 'Data revise',
             'kasus' => Kasus::where('status', 'revise')->orderBy('id', 'desc')->get(),
             'gejala' => BasisPengetahuan::all(),
@@ -180,9 +180,9 @@ class KasusController extends Controller
 
 
 
-        return view('revise.show',[
+        return view('revise.show', [
             'title' => 'Data Detail Revise',
-            'kasus' => Kasus::where('id',$id)->first(),
+            'kasus' => Kasus::where('id', $id)->first(),
             'slc_gejala' => $slc_gejala,
             'gejala' => Gejala::all(),
             'bobot_gejala' => BobotGejala::all(),
@@ -245,6 +245,7 @@ class KasusController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Kasus::where('id', $id)->get()->each->delete();
+        return redirect()->route('kasus.index')->with('status', 'Data kasus berhasil dihapus!');
     }
 }
