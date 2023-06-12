@@ -40,11 +40,9 @@
                       @foreach ($gejala->where('kasus_id', $item->id) as $itemg)
                         <li>{{ $itemg->gejala->nama }}</li>
                       @endforeach
-                      @forelse ($kompleksitas->where('kasus_id', $item->id) as $itemk)
+                      @foreach ($kompleksitas->where('kasus_id', $item->id) as $itemk)
                         <li>{{ $itemk->kompleksitas->nama }}</li>
-                      @empty
-
-                      @endforelse
+                      @endforeach
                     </ul>
                   </td>
                   <td>

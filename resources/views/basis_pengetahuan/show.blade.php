@@ -13,18 +13,40 @@
         <div class="tile-body">
           <!-- Modal trigger button -->
           {{-- <a href="{{ route('basis_pengetahuan.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Detail {{ $title }}</a> --}}
+          <h5>Kasus</h4>
+          <hr>
           <div class="row invoice-info">
             <div class="col-4">
               <address>
-                <h3>Kasus</h3>
-                <br>Nama Pasien : {{ $kasus->pasien->nama }}
-                <br>Diagnosa : {{ $kasus->penyakit->nama }}
+                <h5>Data Pasien</h5>
+                <table>
+                  <tr>
+                    <td>No Kartu Identitas</td>
+                    <td>:</td>
+                    <td>@if (is_null($kasus->pasien->nomor_kartu_identitas)) - @else {{ $kasus->pasien->nomor_kartu_identitas }} @endif </td>
+                  </tr>
+                  <tr>
+                    <td>Nama</td>
+                    <td>:</td>
+                    <td>@if (is_null($kasus->pasien->nama)) - @else {{ $kasus->pasien->nama }} @endif </td>
+                  </tr>
+                  <tr>
+                    <td>Umur</td>
+                    <td>:</td>
+                    <td>@if (is_null($kasus->pasien->umur)) - @else {{ $kasus->pasien->umur }} @endif </td>
+                  </tr>
+                  <tr>
+                    <td>Phone</td>
+                    <td>:</td>
+                    <td>@if (is_null($kasus->pasien->phone)) - @else {{ $kasus->pasien->phone }} @endif </td>
+                  </tr>
+                </table>
               </address>
             </div>
           </div>
 
           <hr>
-          <h4 class="mb-3">Basis Pengetahuan gejala</h4>
+          <h5 class="mb-3">Basis Pengetahuan gejala</h5>
 
           @if (count($slc_gejala) > 0)
           <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambahId"><i class="fa fa-plus"></i> Tambah</button>
@@ -167,7 +189,7 @@
           </div>
 
           <hr>
-          <h4 class="mb-3">Basis Pengetahuan Rekam Medis</h4>
+          <h5 class="mb-3">Basis Pengetahuan Rekam Medis</h5>
 
           @if (count($slc_kompleksitas) > 0)
           <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambahKId"><i class="fa fa-plus"></i> Tambah</button>

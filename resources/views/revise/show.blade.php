@@ -13,18 +13,40 @@
         <div class="tile-body">
           <!-- Modal trigger button -->
           {{-- <a href="{{ route('basis_pengetahuan.create') }}" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Detail {{ $title }}</a> --}}
+          <h3>Kasus</h3>
+          <hr>
           <div class="row invoice-info">
             <div class="col-4">
               <address>
-                <h3>Kasus</h3>
-                <br>Nama Pasien : {{ $kasus->pasien->nama }}
-                <br>Diagnosa : {{ $kasus->penyakit->nama }}
+                <h5>Data Pasien</h5>
+                <table>
+                  <tr>
+                    <td>No Kartu Identitas</td>
+                    <td>&nbsp;:&nbsp;</td>
+                    <td>@if (is_null($kasus->pasien->nomor_kartu_identitas)) - @else {{ $kasus->pasien->nomor_kartu_identitas }} @endif </td>
+                  </tr>
+                  <tr>
+                    <td>Nama</td>
+                    <td>&nbsp;:&nbsp;</td>
+                    <td>@if (is_null($kasus->pasien->nama)) - @else {{ $kasus->pasien->nama }} @endif </td>
+                  </tr>
+                  <tr>
+                    <td>Umur</td>
+                    <td>&nbsp;:&nbsp;</td>
+                    <td>@if (is_null($kasus->pasien->umur)) - @else {{ $kasus->pasien->umur }} @endif </td>
+                  </tr>
+                  <tr>
+                    <td>Phone</td>
+                    <td>&nbsp;:&nbsp;</td>
+                    <td>@if (is_null($kasus->pasien->phone)) - @else {{ $kasus->pasien->phone }} @endif </td>
+                  </tr>
+                </table>
               </address>
             </div>
           </div>
 
           <hr>
-          <h4 class="mb-3">Basis Pengetahuan gejala</h4>
+          <h5 class="mb-3">Basis Pengetahuan gejala</h5>
 
           @if (count($slc_gejala) > 0)
           <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalTambahId"><i class="fa fa-plus"></i> Tambah</button>
@@ -172,15 +194,23 @@
           </div>
 
           <hr>
-
+          <h5>Diagnosa</h5>
           <form action="{{ route('save_revise_note', $kasus->id) }}" method="post">
             @csrf
             @method('put')
             <div class="mb-3">
+              <label for="penyakit_id" class="form-label">Penyakit</label>
+              <select class="form-control form-select form-select-lg" name="penyakit_id" id="penyakit_id">
+                @foreach ($penyakit as $item)
+                <option value="{{ $item->id }}" @if ($kasus->penyakit->id == $item->id) selected @endif>{{ $item->nama }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="mb-3">
               <label for="" class="form-label">Catatan</label>
               <textarea class="form-control" name="note" id="note" rows="3" placeholder="Tulis catatan">{{ $note }}</textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Simpan Catatan</button>
+            <button type="submit" class="btn btn-primary">Simpan dan Selesai</button>
           </form>
           {{-- <h4 class="mb-3">Basis Pengetahuan Kompleksitas</h4>
 

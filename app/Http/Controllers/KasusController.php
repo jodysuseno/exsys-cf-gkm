@@ -185,6 +185,7 @@ class KasusController extends Controller
             'kasus' => Kasus::where('id', $id)->first(),
             'slc_gejala' => $slc_gejala,
             'gejala' => Gejala::all(),
+            'penyakit' => Penyakit::all(),
             'bobot_gejala' => BobotGejala::all(),
             'slc_kompleksitas' => $slc_kompleksitas,
             'kompleksitas' => BobotKompleksitas::all(),
@@ -197,7 +198,9 @@ class KasusController extends Controller
     public function save_revise_note(Request $request, $id)
     {
         $get_kasus = Kasus::where('id', $id)->first();
+        $get_kasus->penyakit_id = $request->penyakit_id;
         $get_kasus->note = $request->note;
+        $get_kasus->keterangan = 'selesai';
         $get_kasus->save();
 
         return redirect()->route('data_revise');
