@@ -50,16 +50,17 @@ class DatabaseSeeder extends Seeder
         ]);
         
         //buat data bobot kompleksitas
-        BobotKompleksitas::create(['nama' => 'Riwayat Penyakit Kronis', 'bobot' => 3]);
-        BobotKompleksitas::create(['nama' => 'Riwayat Keluarga Gangguan Kejiwaan', 'bobot' => 5]);
-        BobotKompleksitas::create(['nama' => 'Riwayat Gangguan Kejiwaan Sebelumnya', 'bobot' => 5]);
+        BobotKompleksitas::create(['nama' => 'Gangguan Medis Kronis', 'bobot' => 3]);
+        BobotKompleksitas::create(['nama' => 'Gangguan Penggunaan Zat', 'bobot' => 5]);
+        BobotKompleksitas::create(['nama' => 'Gangguan Kepribadian', 'bobot' => 5]);
+        BobotKompleksitas::create(['nama' => 'Gangguan Neurologis', 'bobot' => 3]);
         //buat data bobot gejala
         BobotGejala::create(['nama' => 'Gejala Biasa', 'bobot' => 1]);
         BobotGejala::create(['nama' => 'Gejala Sedang', 'bobot' => 3]);
         BobotGejala::create(['nama' => 'Gejaal Dominan', 'bobot' => 5]);
         //buat data penyakit
-        Penyakit::create(['kode' => 'P0001', 'nama' => 'Gangguan Depresi', 'definisi' => 'definisi penyakit', 'solusi' => 'solusi penyakit']);
         Penyakit::create(['kode' => 'P0002', 'nama' => 'Gangguan Kecemasan', 'definisi' => 'definisi penyakit', 'solusi' => 'solusi penyakit']);
+        Penyakit::create(['kode' => 'P0001', 'nama' => 'Gangguan Depresi', 'definisi' => 'definisi penyakit', 'solusi' => 'solusi penyakit']);
         Penyakit::create(['kode' => 'P0003', 'nama' => 'Gangguan Somatoform', 'definisi' => 'definisi penyakit', 'solusi' => 'solusi penyakit']);
         Penyakit::create(['kode' => 'P0004', 'nama' => 'Gangguan Neurotik', 'definisi' => 'definisi penyakit', 'solusi' => 'solusi penyakit']);
         //buat data gejala 
@@ -86,25 +87,25 @@ class DatabaseSeeder extends Seeder
         //buat data pasien
         Pasien::create([
             'nomor_kartu_identitas' => '3514100102030001',
-            'nama' => 'lala',
+            'nama' => 'Muchammad Ainul Yaqin',
             'umur' => '20',
             'phone' => '081234876098',
         ]);
         Pasien::create([
             'nomor_kartu_identitas' => '3514100102040001',
-            'nama' => 'adi',
+            'nama' => 'Ahmad Saifudin',
             'umur' => '20',
             'phone' => '081234876098',
         ]);
         Pasien::create([
             'nomor_kartu_identitas' => '3514100102050001',
-            'nama' => 'amir',
+            'nama' => 'Muhammad Safari',
             'umur' => '20',
             'phone' => '081234876098',
         ]);
         Pasien::create([
             'nomor_kartu_identitas' => '3514100102060001',
-            'nama' => 'budi',
+            'nama' => 'Mochamad Fahmi',
             'umur' => '20',
             'phone' => '081234876098',
         ]);
@@ -142,39 +143,36 @@ class DatabaseSeeder extends Seeder
             'keterangan' => 'selesai',
         ]);
         //buat basis pengetahuan
-        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 2, 'bobot_gejala_id' => 2]);
-        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 3, 'bobot_gejala_id' => 3]);
-        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 8, 'bobot_gejala_id' => 3]);
-        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 9, 'bobot_gejala_id' => 2]);
-        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 10, 'bobot_gejala_id' => 3]);
+        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 1, 'bobot_gejala_id' => 3]);
+        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 3, 'bobot_gejala_id' => 2]);
+        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 5, 'bobot_gejala_id' => 3]);
         BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 11, 'bobot_gejala_id' => 3]);
-        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 12, 'bobot_gejala_id' => 3]);
-        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 14, 'bobot_gejala_id' => 3]);
-        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 15, 'bobot_gejala_id' => 3]);
-        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 16, 'bobot_gejala_id' => 3]);
-        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 17, 'bobot_gejala_id' => 2]);
-        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 18, 'bobot_gejala_id' => 2]);
-        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 20, 'bobot_gejala_id' => 1]);
-        BasisPengetahuan::create(['kasus_id' => 2, 'gejala_id' => 4, 'bobot_gejala_id' => 3]);
-        BasisPengetahuan::create(['kasus_id' => 2, 'gejala_id' => 5, 'bobot_gejala_id' => 3]);
-        BasisPengetahuan::create(['kasus_id' => 2, 'gejala_id' => 6, 'bobot_gejala_id' => 2]);
+        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 18, 'bobot_gejala_id' => 3]);
+        BasisPengetahuan::create(['kasus_id' => 1, 'gejala_id' => 20, 'bobot_gejala_id' => 3]);
+
+        BasisPengetahuan::create(['kasus_id' => 2, 'gejala_id' => 2, 'bobot_gejala_id' => 2]);
+        BasisPengetahuan::create(['kasus_id' => 2, 'gejala_id' => 3, 'bobot_gejala_id' => 2]);
+        BasisPengetahuan::create(['kasus_id' => 2, 'gejala_id' => 9, 'bobot_gejala_id' => 3]);
+        BasisPengetahuan::create(['kasus_id' => 2, 'gejala_id' => 10, 'bobot_gejala_id' => 3]);
+        BasisPengetahuan::create(['kasus_id' => 2, 'gejala_id' => 11, 'bobot_gejala_id' => 3]);
         BasisPengetahuan::create(['kasus_id' => 2, 'gejala_id' => 16, 'bobot_gejala_id' => 3]);
-        BasisPengetahuan::create(['kasus_id' => 3, 'gejala_id' => 1, 'bobot_gejala_id' => 2]);
-        BasisPengetahuan::create(['kasus_id' => 3, 'gejala_id' => 7, 'bobot_gejala_id' => 3]);
-        BasisPengetahuan::create(['kasus_id' => 3, 'gejala_id' => 19, 'bobot_gejala_id' => 2]);
-        BasisPengetahuan::create(['kasus_id' => 4, 'gejala_id' => 3, 'bobot_gejala_id' => 2]);
+        BasisPengetahuan::create(['kasus_id' => 2, 'gejala_id' => 18, 'bobot_gejala_id' => 3]);
+        BasisPengetahuan::create(['kasus_id' => 2, 'gejala_id' => 20, 'bobot_gejala_id' => 3]);
+
+        BasisPengetahuan::create(['kasus_id' => 3, 'gejala_id' => 1, 'bobot_gejala_id' => 3]);
+        BasisPengetahuan::create(['kasus_id' => 3, 'gejala_id' => 3, 'bobot_gejala_id' => 2]);
+        BasisPengetahuan::create(['kasus_id' => 3, 'gejala_id' => 7, 'bobot_gejala_id' => 2]);
+        BasisPengetahuan::create(['kasus_id' => 3, 'gejala_id' => 19, 'bobot_gejala_id' => 3]);
+
+        BasisPengetahuan::create(['kasus_id' => 4, 'gejala_id' => 3, 'bobot_gejala_id' => 3]);
         BasisPengetahuan::create(['kasus_id' => 4, 'gejala_id' => 8, 'bobot_gejala_id' => 3]);
         BasisPengetahuan::create(['kasus_id' => 4, 'gejala_id' => 13, 'bobot_gejala_id' => 3]);
-        BasisPengetahuan::create(['kasus_id' => 4, 'gejala_id' => 18, 'bobot_gejala_id' => 2]);
-        BasisPengetahuan::create(['kasus_id' => 4, 'gejala_id' => 20, 'bobot_gejala_id' => 2]);
+        BasisPengetahuan::create(['kasus_id' => 4, 'gejala_id' => 20, 'bobot_gejala_id' => 3]);
+
         //buat basis pengetahuan kompleksitas
         BasisPengetahuanKompleksitas::create(['kasus_id' => 1, 'kompleksitas_id' => 1,]);
-        BasisPengetahuanKompleksitas::create(['kasus_id' => 1, 'kompleksitas_id' => 2,]);
-        BasisPengetahuanKompleksitas::create(['kasus_id' => 2, 'kompleksitas_id' => 1,]);
         BasisPengetahuanKompleksitas::create(['kasus_id' => 2, 'kompleksitas_id' => 2,]);
-        BasisPengetahuanKompleksitas::create(['kasus_id' => 3, 'kompleksitas_id' => 1,]);
-        BasisPengetahuanKompleksitas::create(['kasus_id' => 3, 'kompleksitas_id' => 2,]);
-        BasisPengetahuanKompleksitas::create(['kasus_id' => 4, 'kompleksitas_id' => 1,]);
-        BasisPengetahuanKompleksitas::create(['kasus_id' => 4, 'kompleksitas_id' => 2,]);
+        BasisPengetahuanKompleksitas::create(['kasus_id' => 3, 'kompleksitas_id' => 3,]);
+        BasisPengetahuanKompleksitas::create(['kasus_id' => 4, 'kompleksitas_id' => 4,]);
     }
 }
