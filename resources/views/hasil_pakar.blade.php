@@ -53,24 +53,24 @@
                   <strong>Hasil Diagnosa</strong><br>
                   <table>
                     <tr>
-                      <td>Penyakit </td>
-                      <td>:</td>
-                      <td>{{ $diagnosa_penyakit }}</td>
+                      <td valign='top'>Penyakit </td>
+                      <td valign='top'>:</td>
+                      <td valign='top'>{{ $diagnosa_penyakit }}</td>
                     </tr>
                     <tr>
-                      <td>Nilai Similarity </td>
-                      <td>:</td>
-                      <td><strong> {{ number_format($diagnosa_nilai_similarity, 2) }} </strong></td>
+                      <td valign='top'>Nilai Similarity </td>
+                      <td valign='top'>:</td>
+                      <td valign='top'><strong> {{ number_format($diagnosa_nilai_similarity, 2) }} </strong></td>
                     </tr>
                     <tr>
-                      <td>Definisi Penyakit </td>
-                      <td>:</td>
-                      <td>{{ $data_penyakit_devinisi }}</td>
+                      <td valign='top'>Definisi Penyakit </td>
+                      <td valign='top'>:</td>
+                      <td valign='top'>{{ $data_penyakit_devinisi }}</td>
                     </tr>
                     <tr>
-                      <td>Solusi </td>
-                      <td>:</td>
-                      <td>{{ $data_penyakit_solusi }}</td>
+                      <td valign='top'>Solusi </td>
+                      <td valign='top'>:</td>
+                      <td valign='top'>{{ $data_penyakit_solusi }}</td>
                     </tr>
                   </table>
                 </address>

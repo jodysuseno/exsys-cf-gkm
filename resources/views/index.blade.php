@@ -44,11 +44,10 @@
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-flex align-items-center fixed-top" style="background-color: #009688">
     <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
-      <div class="align-items-center d-none d-md-flex">
-      <class="d-flex align-items-center">
-      <marquee width="500" height="40">Visi : Terwujudnya Puskemas Sebagai Pusat Pelayanan Kesehatan Dasar Yang Prima
-    Untuk Peningkatan Kualitas Kehidupan Seluruh Masyarakat Moto : Siap Melayani Dengan Hati </marquee>
-  </marquee>
+      <div class="d-flex align-items-center">
+        <marquee width="500">Visi : Terwujudnya Puskemas Sebagai Pusat Pelayanan Kesehatan Dasar Yang Prima
+          Untuk Peningkatan Kualitas Kehidupan Seluruh Masyarakat Moto : Siap Melayani Dengan Hati
+        </marquee>
       </div>
       <div class="d-flex align-items-center">
         <i class="bi bi-phone"></i> (0343) 5643610
