@@ -12,7 +12,7 @@
       <a href="#" style="text-decoration: none;">
         <div class="widget-small info coloured-icon"><i class="icon fa fa-book fa-3x"></i>
           <div class="info">
-            <h4>DATA PAKAR</h4>
+            <h4>DATA DOKTER</h4>
             <p><b>{{ $cnt_user_pakar }}</b></p>
           </div>
         </div>

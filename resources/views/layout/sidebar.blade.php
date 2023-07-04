@@ -13,7 +13,7 @@
     <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Data User</span><i class="treeview-indicator fa fa-angle-right"></i></a>
       <ul class="treeview-menu">
         <li><a class="treeview-item" href="{{ route('admin_index') }}"><i class="icon fa fa-user"></i> Data Admin</a></li>
-        <li><a class="treeview-item" href="{{ route('pakar_index') }}"><i class="icon fa fa-user-md"></i> Data Pakar</a></li>
+        <li><a class="treeview-item" href="{{ route('pakar_index') }}"><i class="icon fa fa-user-md"></i> Data Dokter</a></li>
         <li><a class="treeview-item" href="{{ route('perawat_index') }}"><i class="icon fa fa-user-md"></i> Data Perawat</a></li>
       </ul>
     </li>

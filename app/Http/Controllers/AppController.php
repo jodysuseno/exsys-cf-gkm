@@ -83,7 +83,7 @@ class AppController extends Controller
             'gejala_id.*' => 'required',
         ]);
 
-        // mengambil data kasus yang berstatus selesai untuk dilakuakn perhitungan certainty factor
+        // mengambil data kasus yang berstatus selesai untuk dilakuakn perhitungan 
         $kasus = Kasus::where('keterangan', 'selesai')->get();
         // buat variabel array kosong
         // $kasus_id = array();
