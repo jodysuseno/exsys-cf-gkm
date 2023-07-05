@@ -104,27 +104,40 @@ class KasusController extends Controller
      */
     public function get_diff_select($basis, $pilihan)
     {
+        // mengambil data gejala dari gejala dan di tampung di variabel array $id_gej 
         $id_gej = array();
         foreach ($pilihan as $item) {
             $id_gej[] = $item->id;
         }
+        // mengambil data gejala dari basis pengetahuan dan di tampung di variabel array $id_bas 
         $id_bas = array();
         foreach ($basis as $item) {
             $id_bas[] = $item->gejala_id;
         }
+        // mengambil data gejala yang tidak ada sama pada antara data gejala dan data basis pengetahuan
+        // misal
+        // data gejala = [1,2,3,4,5]
+        // data basispengetahuan = [1,3,5]
+        // hasil setelah menggunakan array_diff() = [2,4]
         $result = array_diff($id_gej, $id_bas);
         return $result;
     }
     public function get_diff_selectk($basis, $pilihan)
     {
+        // mengambil data kompleksitas dari kompleksitas dan di tampung di variabel array $id_gej 
         $id_gej = array();
         foreach ($pilihan as $item) {
             $id_gej[] = $item->id;
         }
+        // mengambil data kompleksitas dari basis pengetahuan dan di tampung di variabel array $id_bas 
         $id_bas = array();
         foreach ($basis as $item) {
             $id_bas[] = $item->kompleksitas_id;
         }
+        // mengambil data kompleksitas yang tidak ada sama pada antara data kompleksitas dan data basis pengetahuan
+        // data kompleksitas = [1,2,3,4,5]
+        // data basispengetahuan = [1,3,5]
+        // hasil setelah menggunakan array_diff() = [2,4]
         $result = array_diff($id_gej, $id_bas);
         return $result;
     }
