@@ -60,7 +60,7 @@
                     <tr>
                       <td valign='top'>Nilai Similarity </td>
                       <td valign='top'>:</td>
-                      <td valign='top'><strong> {{ number_format($diagnosa_nilai_similarity, 2) }} </strong></td>
+                      <td valign='top'><strong> {{ number_format($diagnosa_nilai_similarity, 3) }} </strong></td>
                     </tr>
                     <tr>
                       <td valign='top'>Definisi Penyakit </td>
@@ -123,7 +123,7 @@
             </div>
             <hr>
             <div class="col-12 table-responsive">
-              <strong> 5 Data Kasus dengan similaritas yang tinggi</strong><br>
+              <strong> 10 Data Kasus dengan similaritas yang tinggi</strong><br>
               <table class="table table-striped">
                 <thead>
                   <tr>
@@ -138,8 +138,8 @@
                 <tbody>
                   {{-- looping array $kasus --}}
                   @foreach ($kasus as $key => $item) 
-                    {{-- menampikan 5 data kasus --}}
-                    @if ($key < 5)
+                    {{-- menampikan 10 data kasus --}}
+                    @if ($key < 10)
                     <tr> 
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $item['data_pasien_name'] }}</td>
@@ -179,7 +179,7 @@
                         </ul>
                       </td>
                       {{-- menampilkan hasil similarity tiap kasus --}}
-                      <td>{{ number_format($item['data_result'], 2) }} </td>
+                      <td>{{ number_format($item['data_result'], 3) }} </td>
                     </tr>
                     @endif
                   @endforeach

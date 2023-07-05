@@ -40,6 +40,11 @@
                     <td>:</td>
                     <td>@if (is_null($kasus->pasien->phone)) - @else {{ $kasus->pasien->phone }} @endif </td>
                   </tr>
+                  <tr>
+                    <td>Diagnosa Penyakit</td>
+                    <td>:</td>
+                    <td>@if (is_null($kasus->penyakit->nama)) - @else {{$kasus->penyakit->nama }} @endif </td>
+                  </tr>
                 </table>
               </address>
             </div>

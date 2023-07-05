@@ -42,7 +42,7 @@ class KasusController extends Controller
             'bobot_gejala' => BobotGejala::all(),
             'kompleksitas' => BobotKompleksitas::all(),
             'get_penyakit' => Penyakit::all(),
-            'title' => 'Buat Aturan Pakar'
+            'title' => 'Buat Aturan Basis Data '
         ]);
     }
 
@@ -158,7 +158,7 @@ class KasusController extends Controller
 
 
         return view('basis_pengetahuan.show', [
-            'title' => 'Detail Kasus Pengetahaun',
+            'title' => 'Detail Kasus Pengetahuan',
             'kasus' => Kasus::where('id', $id)->first(),
             'slc_gejala' => $slc_gejala,
             'gejala' => Gejala::all(),
